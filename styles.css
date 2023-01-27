@@ -1,11 +1,8 @@
-.column {
-    float: left;
-    width: 33.33%;
-  }
-  
-  /* Clear floats after the columns */
-  .row:after {
-    content: "";
-    display: table;
-    clear: both;
-  }
+body {
+      background-color: lightblue;
+    }
+    
+    h1 {
+      color: navy;
+      margin-left: 20px;
+    }
