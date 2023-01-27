@@ -7,8 +7,16 @@
 		}
 		
 		/* Create three equal columns that floats next to each other */
-		.column {
+		.column1 {
 		  float: left;
+		  background-color: rgb(132, 194, 214);
+		  width: 33.33%;
+		  padding: 10px;
+		  height: 300px; /* Should be removed. Only for demonstration */
+		}
+		.column2 {
+		  float: left;
+		  background-color: lightblue;
 		  width: 33.33%;
 		  padding: 10px;
 		  height: 300px; /* Should be removed. Only for demonstration */
@@ -23,18 +31,18 @@
 		</style>
 </head>
 <div class="row">
-	<div class="column"><h2>Live Data- </h2>
+	<div class="column1"><h2>Live Data- </h2>
 		<p>Acceleration: </p>
 		<p>Velocity: </p>
 		<p>Booster 1 time:</p>
 		<p>Booster 2 time:</p>
 		<p>Booster 3 time:</p>
 		<p>System Voltage: </p></div>
-	<div class="column"><h2>Graphs- </h2>
+	<div class="column2"><h2>Graphs- </h2>
 		<p>GPS position: </p>
 		<p>Rotation: </p>
 		<p>E-Matches: </p></div>
-	<div class="column"><h2>Peaks- </h2>
+	<div class="column1"><h2>Peaks- </h2>
 		<p>Altitude: </p>
 		<p>Speed: </p>
 		<p>Acceleration:</p>
