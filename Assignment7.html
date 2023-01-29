@@ -30,22 +30,24 @@
 		}
 		</style>
 	</head>
+	<body onload = "display()">
 	<div class="row">
 		<div class="column1"><h2>Live Data- </h2>
-			<p>Acceleration: <input type="text" id="Accel" name="Accel"> </p>
-			<p>Velocity:    <input type="text" id="Vel" name="Vel"> </p>
-			<p>Booster 1 time: <input type="text" id="Boost1" name="Boost1"></p>
-			<p>Booster 2 time: <input type="text" id="Boost2" name="Boost2"></p>
-			<p>Booster 3 time: <input type="text" id="Boost3" name="Boost3"></p>
-			<p>System Voltage: <input type="text" id="Volt" name="Volt"> </p></div>
+			<p>Acceleration: <input type="text" id="Accel" name="Accel" readonly="true" /></p>
+			<p>Velocity: <input type="text" id="Vel" name="Vel"> </p>
+			<p>Booster 1 time: <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
+			<p>Booster 2 time: <input type="text" id="Boost2" name="Boost2" readonly="true" /></p>
+			<p>Booster 3 time: <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
+			<p>System Voltage: <input type="text" id="Volt" name="Volt" readonly="true" /> </p></div>
 		<div class="column2"><h2>Graphs- </h2>
 			<p>GPS position: </p>
 			<p>Rotation: </p>
 			<p>E-Matches: </p></div>
 		<div class="column1"><h2>Peaks- </h2>
-			<p>Altitude: <input type="text" id="PAlti" name="PAlti"> </p>
-			<p>Speed: <input type="text" id="PSpeed" name="Pspeed"> </p>
-			<p>Acceleration: <input type="text" id="PAccel" name="PAccel"> </p>
-			<p>Ejection Altitude: <input type="text" id="Eject" name="Eject"> </p></div>
+			<p>Altitude: <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
+			<p>Speed: <input type="text" id="PSpeed" name="Pspeed" readonly="true" /> </p>
+			<p>Acceleration: <input type="text" id="PAccel" name="PAccel" readonly="true" /> </p>
+			<p>Ejection Altitude: <input type="text" id="Eject" name="Eject" readonly="true" /> </p></div>
 	  </div> 
-	<body><br>
+	  <script src="/RocketTele.js"></script>
+	</body><br>
