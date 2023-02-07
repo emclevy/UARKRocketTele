@@ -1,143 +1,179 @@
-<head>
-	<title>UARK Rocket Telemetry</title>
-	<meta charset = "UTF-8">
-	<script src="/RocketTele.js"></script>
-	<style>
-		* {
-		  box-sizing: border-box;
-		}
-		
-		/* Create three equal columns that floats next to each other */
-		.column {
-		  float: left;
-		  background-color: rgb(132, 194, 214);
-		  width: 33.33%;
-		  /* padding: 10px; */
-		  
-		}
-		/* .column {
-		  float: left;
-		  background-color: lightblue;
-		  width: 33.33%;
-		  padding: 10px;
-		  
-		}
-		.column {
-		  float: left;
-		  background-color: rgb(3, 172, 228);
-		  width: 33.33%;
-		  padding: 10px;
-		  
-		} */
-		
-		/* Clear floats after the columns */
-		.row:after {
-		  content: "";
-		  display: table;
-		  clear: both;
-		}
+<html>
+	<head>
+		<title>UARK Rocket Telemetry</title>
+		<meta charset = "UTF-8">
+		<script src="/RocketTele.js"></script>
+		<script src="/Chart.js"></script>
+		<style>
+			* {
+			  box-sizing: border-box;
+			}
+			.columnData {
+			  float: left;
+			  background-color: lightblue;
+			  width: 50%;
+			  height: 33.33%;
+			  padding: 10px;
+			}
+			.columnGraph {
+			  float: left;
+			  background-color: rgb(132, 194, 214);
+			  width: 33.33%;
+			  height: 66.66%;
+			  padding: 10px;
+			  
+			}
+			/* Clear floats after the columns */
+			.row:after {
+			  content: "";
+			  display: table;
+			  clear: both;
+			}
 		</style>
-	</head>
-	<body onload = "display()">
-	<div class="row">
-		<div class="column"><h2>Live Data- </h2>
-			<p>Acceleration: <input type="text" id="Accel" name="Accel" readonly="true" /></p>
-			<p>Velocity: <input type="text" id="Vel" name="Vel"> </p>
-			<p>Booster 1 time: <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
-			<p>Booster 2 time: <input type="text" id="Boost2" name="Boost2" readonly="true" /></p>
-			<p>Booster 3 time: <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
-			<p>System Voltage: <input type="text" id="Volt" name="Volt" readonly="true" /> </p></div>
-		<div class="column"><h2>Peaks- </h2>
-			<p>Altitude: <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
-			<p>Speed: <input type="text" id="PSpeed" name="Pspeed" readonly="true" /> </p>
-			<p>Acceleration: <input type="text" id="PAccel" name="PAccel" readonly="true" /> </p>
-			<p>Ejection Altitude: <input type="text" id="Eject" name="Eject" readonly="true" /> </p></div>
-	  </div> 
+		</head>
+		<body onload = "display()">
+			<div class="row">
+				<div class="columnData"><h2>Live Data- </h2>
+					<p>Acceleration: <input type="text" id="Accel" name="Accel" readonly="true" /></p>
+					<p>Velocity: <input type="text" id="Vel" name="Vel"> </p>
+					<p>Booster 1 time: <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
+					<p>Booster 2 time: <input type="text" id="Boost2" name="Boost2" readonly="true" /></p>
+					<p>Booster 3 time: <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
+					<p>System Voltage: <input type="text" id="Volt" name="Volt" readonly="true" /> </p>
+				</div>
+				<div class="columnData"><h2>Peaks- </h2>
+					<p>Altitude: <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
+					<p>Speed: <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
+					<p>Acceleration: <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
+					<p>Ejection Altitude: <input type="text" id="Eject" name="Eject" readonly="true" /></p>
+				</div>
+			</div> 
+			<div class="row">
+				<div class="columnGraph">
+					<h2>Graphs - </h2>
+					<p>GPS position: </p>
+					<body>
+						<canvas id="posGPS" style="width:33.33%"></canvas>
 
-		<div class="column"><h2>Graphs- </h2>
-			<p>GPS position: </p>
-			<!-- Graphs -->
-			<script src="/Chart.js"></script>
-			<body>
-			<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+						<script>
+						var xyValues = [
+						{x:50, y:7},
+						{x:60, y:8},
+						{x:70, y:8},
+						{x:80, y:9},
+						{x:90, y:9},
+						{x:100, y:9},
+						{x:110, y:10},
+						{x:120, y:11},
+						{x:130, y:14},
+						{x:140, y:14},
+						{x:150, y:15}
+						];
 
-			<script>
-			var xyValues = [
-			{x:50, y:7},
-			{x:60, y:8},
-			{x:70, y:8},
-			{x:80, y:9},
-			{x:90, y:9},
-			{x:100, y:9},
-			{x:110, y:10},
-			{x:120, y:11},
-			{x:130, y:14},
-			{x:140, y:14},
-			{x:150, y:15}
-			];
+						new Chart("posGPS", {
+						type: "line",
+						data: {
+							datasets: [{
+							pointRadius: 4,
+							pointBackgroundColor: "rgb(0,0,255)",
+							data: xyValues
+							}]
+						},
+						options: {
+							legend: {display: false},
+							scales: {
+							xAxes: [{ticks: {min: 40, max:160}}],
+							yAxes: [{ticks: {min: 6, max:16}}],
+							}
+						}
+						});
+						</script>
+					</body>
+				</div>
+				<div class="columnGraph">
+				<h2><br></h2>
+					<p>Orientation: </p>
+					<body>
+						<canvas id="orientation" style="width:33.33%"></canvas>
 
-			new Chart("myChart", {
-			type: "scatter",
-			data: {
-				datasets: [{
-				pointRadius: 4,
-				pointBackgroundColor: "rgb(0,0,255)",
-				data: xyValues
-				}]
-			},
-			options: {
-				legend: {display: false},
-				scales: {
-				xAxes: [{ticks: {min: 40, max:160}}],
-				yAxes: [{ticks: {min: 6, max:16}}],
-				}
-			}
-			});
-			</script>
+						<script>
+						var xyValues = [
+						{x:50, y:7},
+						{x:60, y:8},
+						{x:70, y:8},
+						{x:80, y:9},
+						{x:90, y:9},
+						{x:100, y:9},
+						{x:110, y:10},
+						{x:120, y:11},
+						{x:130, y:14},
+						{x:140, y:14},
+						{x:150, y:15}
+						];
 
-			</body>
-<!-- end of graphs -->
-			<p>Rotation: </p>
-		
-			<p>E-Matches: </p>
-			<!-- EMATCH Graphs -->
-			<script src="/Chart.js"></script>
-			<body>
-			<canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+						new Chart("orientation", {
+						type: "scatter",
+						data: {
+							datasets: [{
+							pointRadius: 4,
+							pointBackgroundColor: "rgb(0,0,255)",
+							data: xyValues
+							}]
+						},
+						options: {
+							legend: {display: false},
+							scales: {
+							xAxes: [{ticks: {min: 40, max:160}}],
+							yAxes: [{ticks: {min: 6, max:16}}],
+							}
+						}
+						});
+						</script>
+					</body>
+				</div>
+				<div class="columnGraph">
+					<h2><br></h2>
+					<p>E-Match states: </p>
+					<!-- EMATCH Graphs -->
+					<body>
+						<canvas id="ematches" style="width:33.33%"></canvas>
 
-			<script>
-			var xyValues = [
-			{x:50, y:7},
-			{x:60, y:8},
-			{x:70, y:8},
-			{x:80, y:9},
-			{x:90, y:9},
-			{x:100, y:9},
-			{x:110, y:10},
-			{x:120, y:11},
-			{x:130, y:14},
-			{x:140, y:14},
-			{x:150, y:15}
-			];
+						<script>
+						var xyValues = [
+						{x:50, y:7},
+						{x:60, y:8},
+						{x:70, y:8},
+						{x:80, y:9},
+						{x:90, y:9},
+						{x:100, y:9},
+						{x:110, y:10},
+						{x:120, y:11},
+						{x:130, y:14},
+						{x:140, y:14},
+						{x:150, y:15}
+						];
 
-			new Chart("myChart2", {
-			type: "scatter",
-			data: {
-				datasets: [{
-				pointRadius: 4,
-				pointBackgroundColor: "rgb(0,0,255)",
-				data: xyValues
-				}]
-			},
-			options: {
-				legend: {display: false},
-				scales: {
-				xAxes: [{ticks: {min: 40, max:160}}],
-				yAxes: [{ticks: {min: 6, max:16}}],
-				}
-			}
-			});
-			</script>
-
-			</body></div>	
-	</body><br>
+						new Chart("ematches", {
+						type: "line",
+						data: {
+							datasets: [{
+							pointRadius: 4,
+							pointBackgroundColor: "rgb(0,0,255)",
+							data: xyValues
+							}]
+						},
+						options: {
+							legend: {display: false},
+							scales: {
+							xAxes: [{ticks: {min: 40, max:160}}],
+							yAxes: [{ticks: {min: 6, max:16}}],
+							}
+						}
+						});
+						</script>
+					</body>
+				</div>
+			</div>
+		</body>
+	<br>
+</html>
