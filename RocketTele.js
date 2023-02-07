@@ -46,6 +46,8 @@ function display(){
             acceleration.value = 0;
             clearInterval(count);
         }
+
+
     }
 
 

@@ -1,26 +1,34 @@
 <head>
 	<title>UARK Rocket Telemetry</title>
 	<meta charset = "UTF-8">
+	<script src="/RocketTele.js"></script>
 	<style>
 		* {
 		  box-sizing: border-box;
 		}
 		
 		/* Create three equal columns that floats next to each other */
-		.column1 {
+		.column {
 		  float: left;
 		  background-color: rgb(132, 194, 214);
 		  width: 33.33%;
-		  padding: 10px;
-		  height: 300px; /* Should be removed. Only for demonstration */
+		  /* padding: 10px; */
+		  
 		}
-		.column2 {
+		/* .column {
 		  float: left;
 		  background-color: lightblue;
 		  width: 33.33%;
 		  padding: 10px;
-		  height: 300px; /* Should be removed. Only for demonstration */
+		  
 		}
+		.column {
+		  float: left;
+		  background-color: rgb(3, 172, 228);
+		  width: 33.33%;
+		  padding: 10px;
+		  
+		} */
 		
 		/* Clear floats after the columns */
 		.row:after {
@@ -32,22 +40,104 @@
 	</head>
 	<body onload = "display()">
 	<div class="row">
-		<div class="column1"><h2>Live Data- </h2>
+		<div class="column"><h2>Live Data- </h2>
 			<p>Acceleration: <input type="text" id="Accel" name="Accel" readonly="true" /></p>
 			<p>Velocity: <input type="text" id="Vel" name="Vel"> </p>
 			<p>Booster 1 time: <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
 			<p>Booster 2 time: <input type="text" id="Boost2" name="Boost2" readonly="true" /></p>
 			<p>Booster 3 time: <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
 			<p>System Voltage: <input type="text" id="Volt" name="Volt" readonly="true" /> </p></div>
-		<div class="column2"><h2>Graphs- </h2>
-			<p>GPS position: </p>
-			<p>Rotation: </p>
-			<p>E-Matches: </p></div>
-		<div class="column1"><h2>Peaks- </h2>
+		<div class="column"><h2>Peaks- </h2>
 			<p>Altitude: <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
 			<p>Speed: <input type="text" id="PSpeed" name="Pspeed" readonly="true" /> </p>
 			<p>Acceleration: <input type="text" id="PAccel" name="PAccel" readonly="true" /> </p>
 			<p>Ejection Altitude: <input type="text" id="Eject" name="Eject" readonly="true" /> </p></div>
 	  </div> 
-	  <script src="/RocketTele.js"></script>
+
+		<div class="column"><h2>Graphs- </h2>
+			<p>GPS position: </p>
+			<!-- Graphs -->
+			<script src="/Chart.js"></script>
+			<body>
+			<canvas id="myChart" style="width:100%;max-width:700px"></canvas>
+
+			<script>
+			var xyValues = [
+			{x:50, y:7},
+			{x:60, y:8},
+			{x:70, y:8},
+			{x:80, y:9},
+			{x:90, y:9},
+			{x:100, y:9},
+			{x:110, y:10},
+			{x:120, y:11},
+			{x:130, y:14},
+			{x:140, y:14},
+			{x:150, y:15}
+			];
+
+			new Chart("myChart", {
+			type: "scatter",
+			data: {
+				datasets: [{
+				pointRadius: 4,
+				pointBackgroundColor: "rgb(0,0,255)",
+				data: xyValues
+				}]
+			},
+			options: {
+				legend: {display: false},
+				scales: {
+				xAxes: [{ticks: {min: 40, max:160}}],
+				yAxes: [{ticks: {min: 6, max:16}}],
+				}
+			}
+			});
+			</script>
+
+			</body>
+<!-- end of graphs -->
+			<p>Rotation: </p>
+		
+			<p>E-Matches: </p>
+			<!-- EMATCH Graphs -->
+			<script src="/Chart.js"></script>
+			<body>
+			<canvas id="myChart2" style="width:100%;max-width:700px"></canvas>
+
+			<script>
+			var xyValues = [
+			{x:50, y:7},
+			{x:60, y:8},
+			{x:70, y:8},
+			{x:80, y:9},
+			{x:90, y:9},
+			{x:100, y:9},
+			{x:110, y:10},
+			{x:120, y:11},
+			{x:130, y:14},
+			{x:140, y:14},
+			{x:150, y:15}
+			];
+
+			new Chart("myChart2", {
+			type: "scatter",
+			data: {
+				datasets: [{
+				pointRadius: 4,
+				pointBackgroundColor: "rgb(0,0,255)",
+				data: xyValues
+				}]
+			},
+			options: {
+				legend: {display: false},
+				scales: {
+				xAxes: [{ticks: {min: 40, max:160}}],
+				yAxes: [{ticks: {min: 6, max:16}}],
+				}
+			}
+			});
+			</script>
+
+			</body></div>	
 	</body><br>
