@@ -58,37 +58,37 @@
 			<body>
 				<canvas id="posGPS" style="width:33.33%"></canvas>
 				<script>
-				var xyValues = [
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0},
-				{x:0, y:0}
-				];
+					var xyValues = [
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0},
+					{x:0, y:0}
+					];
 
-				new Chart("posGPS", {
-				type: "line",
-				data: {
-					datasets: [{
-					pointRadius: 4,
-					pointBackgroundColor: "rgb(0,0,255)",
-					data: xyValues
-					}]
-				},
-				options: {
-					legend: {display: false},
-					scales: {
-					xAxes: [{ticks: {min: 40, max:160}}],
-					yAxes: [{ticks: {min: 6, max:16}}],
+					new Chart("posGPS", {
+					type: "line",
+					data: {
+						datasets: [{
+						pointRadius: 4,
+						pointBackgroundColor: "rgb(0,0,255)",
+						data: xyValues
+						}]
+					},
+					options: {
+						legend: {display: false},
+						scales: {
+						xAxes: [{ticks: {min: 40, max:160}}],
+						yAxes: [{ticks: {min: 6, max:16}}],
+						}
 					}
-				}
-				});
+					});
 				</script>
 			</body>
 		</div>
@@ -99,37 +99,37 @@
 			<body>
 				<canvas id="orientation" style="width:33.33%"></canvas>
 				<script>
-				var xyValues = [
-				{x:50, y:7},
-				{x:60, y:8},
-				{x:70, y:8},
-				{x:80, y:9},
-				{x:90, y:9},
-				{x:100, y:9},
-				{x:110, y:10},
-				{x:120, y:11},
-				{x:130, y:14},
-				{x:140, y:14},
-				{x:150, y:15}
-				];
+					var xyValues = [
+					{x:50, y:7},
+					{x:60, y:8},
+					{x:70, y:8},
+					{x:80, y:9},
+					{x:90, y:9},
+					{x:100, y:9},
+					{x:110, y:10},
+					{x:120, y:11},
+					{x:130, y:14},
+					{x:140, y:14},
+					{x:150, y:15}
+					];
 
-				new Chart("orientation", {
-				type: "scatter",
-				data: {
-					datasets: [{
-					pointRadius: 4,
-					// pointBackgroundColor: "rgb(0,0,255)",
-					data: xyValues
-					}]
-				},
-				options: {
-					legend: {display: false},
-					scales: {
-					xAxes: [{ticks: {min: 40, max:160}}],
-					yAxes: [{ticks: {min: 6, max:16}}],
+					new Chart("orientation", {
+					type: "scatter",
+					data: {
+						datasets: [{
+						pointRadius: 4,
+						// pointBackgroundColor: "rgb(0,0,255)",
+						data: xyValues
+						}]
+					},
+					options: {
+						legend: {display: false},
+						scales: {
+						xAxes: [{ticks: {min: 40, max:160}}],
+						yAxes: [{ticks: {min: 6, max:16}}],
+						}
 					}
-				}
-				});
+					});
 				</script>
 			</body>
 		</div>
@@ -140,37 +140,44 @@
 			<body>
 				<canvas id="ematches" style="width:33.33%"></canvas>
 				<script>
-				var xyValues = [
-				{x:50, y:7},
-				{x:60, y:8},
-				{x:70, y:8},
-				{x:80, y:9},
-				{x:90, y:9},
-				{x:100, y:9},
-				{x:110, y:10},
-				{x:120, y:11},
-				{x:130, y:14},
-				{x:140, y:14},
-				{x:150, y:15}
-				];
-
-				new Chart("ematches", {
-				type: "line",
-				data: {
-					datasets: [{
-					pointRadius: 4,
-					pointBackgroundColor: "rgb(0,0,255)",
-					data: xyValues
-					}]
-				},
-				options: {
-					legend: {display: false},
-					scales: {
-					xAxes: [{ticks: {min: 40, max:160}}],
-					yAxes: [{ticks: {min: 6, max:16}}],
-					}
-				}
-				});
+					var chart = new Chart("ematches", {
+					   type: 'scatter',
+					   data: {
+						  datasets: [{
+							 data: [{x:0, y:0}, {x:1, y:0}, {x:1, y:1}, {x:3, y:1}, {x:3, y:0}],
+							 borderColor: 'black',
+							 borderWidth: 1,
+							 fill: false,
+							 tension: 0,
+							 showLine: true
+						  }]
+					   },
+					   options: {
+						  legend: false,
+						  tooltips: false,
+						  scales: {
+							 xAxes: [{
+								ticks: {
+								   min: 0,
+								   max: 10
+								},
+								gridLines: {
+									color: '#888',
+								}
+							 }],
+							 yAxes: [{
+								ticks: {
+								   min: 0,
+								   max: 4,
+								   padding: 10
+								},
+								gridLines: {
+									drawOnChartArea: false
+								}
+							 }]
+						  }
+					   }
+					});
 				</script>
 			</body>
 		</div>
