@@ -141,17 +141,30 @@
 				<canvas id="ematches" style="width:33.33%"></canvas>
 				<script>
 					var chart = new Chart("ematches", {
-					   type: 'scatter',
-					   data: {
-						  datasets: [{
-							 data: [{x:0, y:0}, {x:1, y:0}, {x:1, y:1}, {x:3, y:1}, {x:3, y:0}],
-							 borderColor: 'black',
-							 borderWidth: 1,
-							 fill: false,
-							 tension: 0,
-							 showLine: true
-						  }]
-					   },
+						type: 'scatter',
+						data: {
+							datasets: [
+							//Test dataset 1
+								{
+									data: [{x:0, y:0}, {x:1, y:0}, {x:1, y:1}, {x:3, y:1}, {x:3, y:0}],
+									borderColor: 'black',
+									borderWidth: 1,
+									fill: false,
+									tension: 0,
+									showLine: true
+								},
+							  
+								//Test dataset 2
+								{
+									data: [{x:4, y:0}, {x:4, y:1}, {x:5.5, y:1}, {x:5.5, y:0}],
+									borderColor: 'green',
+									borderWidth: 1,
+									fill: false,
+									tension: 0,
+									showLine: true
+								}
+							]
+						},
 					   options: {
 						  legend: false,
 						  tooltips: false,
