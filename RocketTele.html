@@ -98,38 +98,62 @@
 			<!-- Orientation graphic -->
 			<body>
 				<canvas id="orientation" style="width:33.33%"></canvas>
+				<button onclick="show_image('rocket.png');">Add Google Logo</button> 
 				<script>
-					var xyValues = [
-					{x:50, y:7},
-					{x:60, y:8},
-					{x:70, y:8},
-					{x:80, y:9},
-					{x:90, y:9},
-					{x:100, y:9},
-					{x:110, y:10},
-					{x:120, y:11},
-					{x:130, y:14},
-					{x:140, y:14},
-					{x:150, y:15}
-					];
-
-					new Chart("orientation", {
-					type: "scatter",
-					data: {
-						datasets: [{
-						pointRadius: 4,
-						// pointBackgroundColor: "rgb(0,0,255)",
-						data: xyValues
-						}]
-					},
-					options: {
-						legend: {display: false},
-						scales: {
-						xAxes: [{ticks: {min: 40, max:160}}],
-						yAxes: [{ticks: {min: 6, max:16}}],
-						}
+					// // super(x, y, 60, 95);
+					// // this.model = model;
+					// this.imageNum = 0;
+					// // this.countMario = 0;
+					// this.image.src = "rocket.jpeg";
+					// // this.jumpCount = 0;
+					// // this.marioScreenLocation = 150;
+					// // this.type = "mario";
+					// // this.vert_velocity = 0;
+					// this.images = [];
+					// this.imageNum = ["rocket.jpeg", "rocketRight1.jpeg", "rocketRight2.jpeg", "rocketRight3.jpeg", "rocketLeft1.jpeg", "rocketLeft2.jpeg", "rocketLeft3.jpeg"];
+					// for(let i = 0; i < this.imageNum.length; i++){
+					// 	this.images[i] = new Image();
+					// 	this.images[i].src = this.imageNum[i];
+					// }
+					function show_image(src){
+						var img = document.createElement("rocket.png");
+						
+						img.src = src;
+						img.width = 10;
+						img.height = 10;
+						document.body.appendChild(img);
 					}
-					});
+					// var xyValues = [
+					// {x:50, y:7},
+					// {x:60, y:8},
+					// {x:70, y:8},
+					// {x:80, y:9},
+					// {x:90, y:9},
+					// {x:100, y:9},
+					// {x:110, y:10},
+					// {x:120, y:11},
+					// {x:130, y:14},
+					// {x:140, y:14},
+					// {x:150, y:15}
+					// ];
+
+					// new Chart("orientation", {
+					// type: "scatter",
+					// data: {
+					// 	datasets: [{
+					// 	pointRadius: 4,
+					// 	// pointBackgroundColor: "rgb(0,0,255)",
+					// 	data: xyValues
+					// 	}]
+					// },
+					// options: {
+					// 	legend: {display: false},
+					// 	scales: {
+					// 	xAxes: [{ticks: {min: 40, max:160}}],
+					// 	yAxes: [{ticks: {min: 6, max:16}}],
+					// 	}
+					// }
+					// });
 				</script>
 			</body>
 		</div>
