@@ -98,8 +98,32 @@
 			<!-- Orientation graphic -->
 			<body>
 				<canvas id="orientation" style="width:33.33%"></canvas>
-				<button onclick="show_image('rocket.png');">Add Google Logo</button> 
+				<!-- <button onclick="show_image('rocket.png');">Add Google Logo</button>  -->
 				<script>
+					var canvas = document.getElementById('orientation')
+					var ctx = canvas.getContext('2d');
+					
+					var images = [];
+					images.length = 5;
+					
+					for(var i = 1; i < images.length; i++)
+					{
+						images[i] = new Image();
+						images[i].src = 'rocketship'+ i.toString() + '.png';
+					
+					}
+					var i = 1;
+					
+							setInterval(images.onload = function(){
+							i++;
+								if(i >= 5)
+								{
+									i = 1;
+								}
+							ctx.drawImage(images[i],120,50)
+					
+							},100)
+					
 					// // super(x, y, 60, 95);
 					// // this.model = model;
 					// this.imageNum = 0;
@@ -115,6 +139,10 @@
 					// 	this.images[i] = new Image();
 					// 	this.images[i].src = this.imageNum[i];
 					// }
+
+
+
+					/************************Show Image function************************/
 					function show_image(src){
 						var img = document.createElement("rocket.png");
 						
@@ -123,6 +151,7 @@
 						img.height = 10;
 						document.body.appendChild(img);
 					}
+					/********************************************************************/
 					// var xyValues = [
 					// {x:50, y:7},
 					// {x:60, y:8},
