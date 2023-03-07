@@ -100,29 +100,56 @@
 				<canvas id="orientation" style="width:33.33%"></canvas>
 				<!-- <button onclick="show_image('rocket.png');">Add Google Logo</button>  -->
 				<script>
-					var canvas = document.getElementById('orientation')
+					var canvas = document.getElementById('orientation');
 					var ctx = canvas.getContext('2d');
 					
 					var images = [];
 					images.length = 5;
 					
-					for(var i = 1; i < images.length; i++)
-					{
-						images[i] = new Image();
-						images[i].src = 'rocketship'+ i.toString() + '.png';
-					
+					for (var i = 1; i < images.length; i++) {
+					  images[i] = new Image();
+					  images[i].src = 'rocketship' + i.toString() + '.png';
 					}
+					
+					var x = 0;
 					var i = 1;
 					
-							setInterval(images.onload = function(){
-							i++;
-								if(i >= 5)
-								{
-									i = 1;
-								}
-							ctx.drawImage(images[i],120,50)
+					setInterval(function() {
+					  ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+					  var img = images[i];
+					  var aspectRatio = img.width / img.height;
 					
-							},100)
+					  //Calculate the maximum size of the sprite image based on the canvas size
+					  var maxWidth = canvas.width * 0.8;
+					  var maxHeight = canvas.height * 0.8;
+					
+					  // Calculate the width and height of the sprite image based on the aspect ratio and canvas size
+					  var width = Math.min(maxWidth, maxHeight * aspectRatio);
+					  var height = Math.min(maxHeight, maxWidth / aspectRatio);
+					
+					  // Calculate the position to draw the sprite image based on the canvas size and sprite size
+					  var xPosition = (canvas.width - width) / 2;
+					  var yPosition = (canvas.height - height) / 2;
+					
+					  // Draw the sprite image with the adjusted size and position
+					  ctx.drawImage(img, xPosition, yPosition, width, height);
+					  // Increase x value
+					  x = 10;
+					
+					  // Check if x value is above a certain threshold and change sprite image accordingly
+					  if (x >= 50 && x < 100) {
+						i = 2;
+					  } else if (x >= 100 && x < 150) {
+						i = 3;
+					  } else if (x >= 150 && x < 200) {
+						i = 4;
+					  } else if (x >= 200) {
+						i = 5;
+					  } else {
+						i = 1;
+					  }
+					}, 100);	
 					
 					// // super(x, y, 60, 95);
 					// // this.model = model;
