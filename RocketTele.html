@@ -59,20 +59,20 @@
 			<p style="color:#008000">GPS position: </p>
 			<!-- GPS graphic -->
 			<body>
-				<canvas id="posGPS" style="width:33.33%"></canvas>
+				<canvas id="posGPS" style="width:200px"></canvas>
 				<script>
 					var xyValues = [
 					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0},
-					{x:0, y:0}
+					{x:10, y:10},
+					{x:20, y:20},
+					{x:30, y:25},
+					{x:30, y:35},
+					{x:35, y:40},
+					{x:40, y:50},
+					{x:50, y:55},
+					{x:50, y:60},
+					{x:50, y:70},
+					{x:60, y:80}
 					];
 
 					new Chart("posGPS", {
@@ -80,15 +80,15 @@
 					data: {
 						datasets: [{
 						pointRadius: 4,
-						pointBackgroundColor: "rgb(0,0,255)",
+						pointBackgroundColor: "red",
 						data: xyValues
 						}]
 					},
 					options: {
 						legend: {display: false},
 						scales: {
-						xAxes: [{ticks: {min: 40, max:160}}],
-						yAxes: [{ticks: {min: 6, max:16}}],
+						xAxes: [{ticks: {min: 0, max:100}}],
+						yAxes: [{ticks: {min: 0, max:100}}],
 						}
 					}
 					});
