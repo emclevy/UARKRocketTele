@@ -12,15 +12,17 @@
 		  float: left;
 		  background-color: black;
 		  width: 50%;
-		  height: 350px;
-		  padding: 10px;
+		  height: 45%;
+		  padding-left: 2%;
+		  padding-right: 2%;
 		}
 		.columnGraph {
 		  float: left;
 		  background-color: black;
 		  width: 33.33%;
-		  height: 600px;
-		  padding: 10px;
+		  height: 55%;
+		  padding-left: 2%;
+		  padding-right: 2%;
 		  
 		}
 		/* Clear floats after the columns */
@@ -35,7 +37,7 @@
 
 <body onload = "display()">
 	<div class="row">
-		<div  style="border:3px double green;padding:2%;" class="columnData"><h2 style="color:#008000">Live data - </h2>
+		<div  style="border:3px double green;" class="columnData"><h2 style="color:#008000">Live data - </h2>
 			<p style="color:#008000">Acceleration: <input type="text" id="Accel" name="Accel" readonly="true" /></p>
 			<p style="color:#008000">Velocity: <input type="text" id="Vel" name="Vel"> </p>
 			<p style="color:#008000">Booster 1 time: <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
@@ -43,7 +45,7 @@
 			<p style="color:#008000">Booster 3 time: <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
 			<p style="color:#008000">System Voltage: <input type="text" id="Volt" name="Volt" readonly="true" /> </p>
 		</div>
-		<div  style="border:3px double green;padding:2%;" class="columnData"><h2 style="color:#008000">Peak data - </h2>
+		<div  style="border:3px double green;padding-left:2%;padding-right:2%;" class="columnData"><h2 style="color:#008000">Peak data - </h2>
 			<p style="color:#008000">Altitude: <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
 			<p style="color:#008000">Speed: <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
 			<p style="color:#008000">Acceleration: <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
@@ -51,7 +53,7 @@
 		</div>
 	</div> 
 	<div class="row">
-		<div  style="border:3px double green;padding:2%;" class="columnGraph">
+		<div  style="border:3px double green;" class="columnGraph">
 			<h2 style="color:#008000">Graphs - </h2>
 			<p style="color:#008000">GPS position: </p>
 			<!-- GPS graphic -->
@@ -92,7 +94,7 @@
 				</script>
 			</body>
 		</div>
-		<div  style="border:3px double green;padding:2%;" class="columnGraph">
+		<div  style="border:3px double green;" class="columnGraph">
 		<h2><br></h2>
 			<p style="color:#008000">Orientation: </p>
 			<!-- Orientation graphic -->
@@ -213,7 +215,7 @@
 				</script>
 			</body>
 		</div>
-		<div  style="border:3px double green;padding:2%;" class="columnGraph">
+		<div  style="border:3px double green;" class="columnGraph">
 			<h2><br></h2>
 			<p style="color:#008000">E-Match states: </p>
 			<!-- EMATCH waveforms -->
