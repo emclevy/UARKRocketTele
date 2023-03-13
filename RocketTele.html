@@ -8,6 +8,88 @@
 		* {
 		  box-sizing: border-box;
 		}
+		
+		.form-field {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			margin-bottom: 10px;
+		  }
+		  .form-field label {
+			margin-right: 10px;
+			flex-basis: 30%;
+		  }
+		  .form-field input[type="text"] {
+			flex-basis: 70%;
+		  }
+
+
+		  /*.ejection-button {
+			
+			background-color: #FF0000;
+  			color: #FFFFFF;
+			border-radius: 50%;
+  			width: 150px;
+  			height: 150px;
+  			font-size: 18px;
+  			line-height: 150px;
+  			text-align: center;
+  			text-transform: uppercase;
+  			box-shadow: 5px 5px 5px #888888;
+			transition: background-color 0.3s ease;
+		  }
+		  
+		  .ejection-button:hover {
+			background-color: #CC0000;
+			cursor: pointer;
+		  }*/
+		  .ejection-button {
+			background-color: #FF0000;
+			color: #FFFFFF;
+			border-radius: 50%;
+			width: 150px;
+			height: 150px;
+			font-size: 18px;
+			line-height: 150px;
+			text-align: center;
+			text-transform: uppercase;
+			box-shadow: 0px 3px 3px #888888, inset 0px 2px 2px rgba(255,255,255,0.5);
+			background: linear-gradient(to bottom, #FF0000, #8B0000);
+			position: relative;
+		  }
+		  
+		  .ejection-button:before {
+			content: "";
+			width: 100%;
+			height: 50%;
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.3);
+			
+		  }
+		  
+		  .ejection-button:after {
+			content: "";
+			width: 60%;
+			height: 60%;
+			position: absolute;
+			top: 20%;
+			left: 20%;
+			border-radius: 50%;
+			background: rgba(255,255,255,0.3);
+			box-shadow: 0px 1px 1px rgba(0,0,0,0.5), inset 0px 1px 1px rgba(255,255,255,0.5);
+		  }
+		  
+		  .ejection-button:hover {
+			background: linear-gradient(to bottom, #CC0000, #8B0000);
+			cursor: pointer;
+		  }
+		  
+		  
+
+		 /************************/
 		.columnData {
 		  float: left;
 		  background-color: black;
@@ -31,26 +113,40 @@
 		  display: table;
 		  clear: both;
 		}
+		.button {
+			background-color: red; /* Green */
+			border: none;
+			color: white;
+			padding: 20px;
+			text-align: center;
+			text-decoration: none;
+			display: inline-block;
+			font-size: 16px;
+			margin: 4px 2px;
+
+		  }
+		.button{border-radius: 50%;}
 	</style>
 </head>
 
 
 <body onload = "display()">
-	<div class="row">
+	<div class="row">		  
 		<div  style="border:3px double green;" class="columnData"><h2 style="color:#008000">Live data - </h2>
-			<p style="color:#008000">Acceleration: <input type="text" id="Accel" name="Accel" readonly="true" /></p>
-			<p style="color:#008000">Velocity: <input type="text" id="Vel" name="Vel"> </p>
-			<p style="color:#008000">Booster 1 time: <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
-			<p style="color:#008000">Booster 2 time: <input type="text" id="Boost2" name="Boost2" readonly="true" /></p>
-			<p style="color:#008000">Booster 3 time: <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
-			<p style="color:#008000">System Voltage: <input type="text" id="Volt" name="Volt" readonly="true" /> </p>
+			<p class="form-field" style="color:#008000">  <label for="Accel">Acceleration:</label> <input type="text" id="Accel" name="Accel" readonly="true" /></p>
+			<p class="form-field" style="color:#008000">  <label for="Vel">Velocity:</label> <input type="text" id="Vel" name="Vel"> </p>
+			<p class="form-field" style="color:#008000">  <label for="Boost1">Booster 1 time:</label> <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
+			<p class="form-field" style="color:#008000">  <label for="Boost2">Booster 2 time:</label> <input type="text" id="Boost2" name="Boost2" readonly="true" /></p>
+			<p class="form-field" style="color:#008000">  <label for="Boost3">Booster 3 time:</label> <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
+			<p class="form-field" style="color:#008000">  <label for="Volt">System Voltage:</label> <input type="text" id="Volt" name="Volt" readonly="true" /> </p>
 		</div>
 		<div  style="border:3px double green;padding-left:2%;padding-right:2%;" class="columnData"><h2 style="color:#008000">Peak data - </h2>
-			<p style="color:#008000">Altitude: <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
-			<p style="color:#008000">Speed: <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
-			<p style="color:#008000">Acceleration: <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
-			<p style="color:#008000">Ejection Altitude: <input type="text" id="Eject" name="Eject" readonly="true" /></p>
-			<p style="color: #008000"> <button type="button">ABORT ROCKET</button></p>
+			<p class="form-field"style="color:#008000"> <label for="PAlti">Altitude:</label> <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
+			<p class="form-field"style="color:#008000"> <label for="Pspeed">Speed:</label> <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
+			<p class="form-field"style="color:#008000"> <label for="PAccel">Acceleration:</label> <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
+			<p class="form-field"style="color:#008000"> <label for="Eject">Ejection Altitude:</label> <input type="text" id="Eject" name="Eject" readonly="true" /></p>
+			<p><button class="ejection-button">problem</button></p>
+		
 		</div>
 	</div> 
 	<div class="row">
@@ -124,8 +220,8 @@
 					  var aspectRatio = img.width / img.height;
 					
 					  //Calculate the maximum size of the sprite image based on the canvas size
-					  var maxWidth = canvas.width * 0.8;
-					  var maxHeight = canvas.height * 0.8;
+					  var maxWidth = canvas.width * 1.2;
+					  var maxHeight = canvas.height * 1.2;
 					
 					  // Calculate the width and height of the sprite image based on the aspect ratio and canvas size
 					  var width = Math.min(maxWidth, maxHeight * aspectRatio);
