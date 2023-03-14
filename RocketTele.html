@@ -23,21 +23,34 @@
 			flex-basis: 70%;
 		  }
 
-		  .ejection-button {
+		  .parachute-button {
 			background-color: #FF0000;
 			color: #FFFFFF;
 			border-radius: 50%;
-			width: 20%;
-			height: auto;
-			font-size: 110%;
-			line-height: 150px;
+			width: 125px;
+			height: 125px;
+			font-size: 18px;
+			line-height: 125px;
 			text-align: center;
 			text-transform: uppercase;
 			box-shadow: 0px 3px 3px #888888, inset 0px 2px 2px rgba(255,255,255,0.5);
 			background: linear-gradient(to bottom, #FF0000, #8B0000);
 			position: relative;
 		  }
-		  
+		  .drogue-button {
+			background-color: #FF0000;
+			color: #FFFFFF;
+			border-radius: 50%;
+			width: 125px;
+			height: 125px;
+			font-size: 18px;
+			line-height: 125px;
+			text-align: center;
+			text-transform: uppercase;
+			box-shadow: 0px 3px 3px #888888, inset 0px 2px 2px rgba(255,255,255,0.5);
+			background: linear-gradient(to bottom, #FF0000, #8B0000);
+			position: relative;
+		  }
 		  .ejection-button:before {
 			content: "";
 			width: 100%;
@@ -125,45 +138,47 @@
 			<p class="form-field"style="color:#008000"> <label for="Pspeed">Speed:</label> <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
 			<p class="form-field"style="color:#008000"> <label for="PAccel">Acceleration:</label> <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
 			<p class="form-field"style="color:#008000"> <label for="Eject">Ejection Altitude:</label> <input type="text" id="Eject" name="Eject" readonly="true" /></p>
-			<p><button class="ejection-button">ABORT</button></p>
+			<p><button class="drogue-button">Drogue</button> "    " <button class="parachute-button">Para</button></p>
+			
 		
 		</div>
 	</div> 
 	<div class="row">
 		<div  style="border:3px double green;" class="columnGraph">
+			<h2 style="color:#008000">Graphs - </h2>
 			<p style="color:#008000">GPS position: </p>
 			<!-- GPS graphic -->
 			<body>
-				<canvas id="posGPS"></canvas>
+				<canvas id="posGPS" style="width:200px"></canvas>
 				<script>
 					var xyValues = [
 					{x:0, y:0},
 					{x:10, y:10},
 					{x:20, y:20},
 					{x:30, y:25},
+					{x:30, y:35},
 					{x:35, y:40},
 					{x:40, y:50},
 					{x:50, y:55},
+					{x:50, y:60},
+					{x:50, y:70},
 					{x:60, y:80}
 					];
 
 					new Chart("posGPS", {
-					type: "scatter",
+					type: "line",
 					data: {
 						datasets: [{
 						pointRadius: 4,
 						pointBackgroundColor: "red",
-						data: xyValues,
-						showLine: true,
-						tension: 0,
-						borderColor: "red"
+						data: xyValues
 						}]
 					},
 					options: {
 						legend: {display: false},
 						scales: {
-						x: [{ticks: {min: 0, max:100}}, {gridLines: {zeroLineColor: "white"}}],
-						y: [{ticks: {min: 0, max:100}}, {gridLines: {zeroLineColor: "white"}}],
+						xAxes: [{ticks: {min: 0, max:100}}],
+						yAxes: [{ticks: {min: 0, max:100}}],
 						}
 					}
 					});
@@ -171,10 +186,11 @@
 			</body>
 		</div>
 		<div  style="border:3px double green;" class="columnGraph">
+		<h2><br></h2>
 			<p style="color:#008000">Orientation: </p>
 			<!-- Orientation graphic -->
 			<body>
-				<canvas id="orientation" style="width:100%; height = 100%"></canvas>
+				<canvas id="orientation" style="width:33.33%"></canvas>
 				<!-- <button onclick="show_image('rocket.png');">Add Google Logo</button>  -->
 				<script>
 					var canvas = document.getElementById('orientation');
@@ -185,7 +201,7 @@
 					
 					for (var i = 1; i < images.length; i++) {
 					  images[i] = new Image();
-					  images[i].src = 'sprites/rocketship' + i.toString() + '.png';
+					  images[i].src = 'rocketship' + i.toString() + '.png';
 					}
 					
 					var x = 0;
@@ -291,10 +307,11 @@
 			</body>
 		</div>
 		<div  style="border:3px double green;" class="columnGraph">
+			<h2><br></h2>
 			<p style="color:#008000">E-Match states: </p>
 			<!-- EMATCH waveforms -->
 			<body>
-				<canvas id="ematches"</canvas>
+				<canvas id="ematches" style="width:33.33%"></canvas>
 				<script>
 					var chart = new Chart("ematches", {
 						type: 'scatter',
@@ -302,8 +319,8 @@
 							datasets: [
 							//Test dataset 1
 								{
-									data: [{x:1, y:0}, {x:1, y:1}, {x:3, y:1}, {x:3, y:0}],
-									borderColor: 'MediumSeaGreen',
+									data: [{x:0, y:0}, {x:1, y:0}, {x:1, y:1}, {x:3, y:1}, {x:3, y:0}],
+									borderColor: 'black',
 									borderWidth: 1,
 									fill: false,
 									tension: 0,
@@ -332,13 +349,12 @@
 								},
 								gridLines: {
 									color: '#888',
-									drawOnChartArea: false
 								}
 							 }],
 							 yAxes: [{
 								ticks: {
 								   min: 0,
-								   max: 1,
+								   max: 4,
 								   padding: 10
 								},
 								gridLines: {
