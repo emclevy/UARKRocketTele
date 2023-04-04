@@ -1,23 +1,24 @@
 //#include FreeRTOS files
 
-//add extra state for hold state -> wait for xxStart = 1 then go to S0
-//add extra state for hold state -> wait for xxStart = 1 then go to S0
-//add extra state for hold state -> wait for xxStart = 1 then go to S0
-//add extra state for hold state -> wait for xxStart = 1 then go to S0
-//add extra state for hold state -> wait for xxStart = 1 then go to S0
+
 
 
 typedef enum{
     S0,
     S1,
     S2,
-    S3
+    S3,
+    S4
 } State;
 
-State state = S0;
+State state = S4;
+int engineSwitchStart;
+int engineSwitchCompleted;
 
 void engineSwitchFSM(){
     switch(state){
+        case S4:
+            holdState();
         case S0:
             pinCheck();
         case S1:
@@ -25,8 +26,13 @@ void engineSwitchFSM(){
         case S2:
             launch_Engine3();
         case S3:
-            completed();
+            engineSwitchCompleted = completed();
     }
+}
+
+void holdState(){
+    while(engineSwitchStart != 1) {}
+    state = S0;
 }
 
 void pinCheck(){
@@ -41,16 +47,18 @@ void pinCheck(){
 
 void launch_Engine2(){
     //set pin 21 to 1;
+    P21SEL |= 1;
     state = S3;
 }
 
 void launch_Engine3(){
     //set pin 22 to 1;
+    P22SEL |= 1;
     state = S3;
 }
 
 int completed(){
-    //add to Main count;
+    //add to Main count ?!?!?!?!?
     //Say engineSwitch_Finished
     return 1;
 }
