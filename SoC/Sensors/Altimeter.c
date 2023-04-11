@@ -181,7 +181,7 @@ void timer_init(void)
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A0_ISR(void)
 {
-    // Insert the altitude calculation code here
+    //Calculate Altitude
     if (bmp388_init())
     {
         bmp388_read_coefficients();
