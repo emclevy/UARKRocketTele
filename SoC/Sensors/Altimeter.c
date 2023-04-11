@@ -177,10 +177,12 @@ void timer_init(void)
 
 /*
  * Altitude timer interrupt
+ * TODO: look into using the case statement for interrupt table(?)
  */
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A0_ISR(void)
 {
+    //TODO: Remove the function call from the interrupt: raise a flag instead to allow the function to execute in main
     //Calculate Altitude
     if (bmp388_init())
     {
