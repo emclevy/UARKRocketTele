@@ -22,7 +22,27 @@
 		  .form-field input[type="text"] {
 			flex-basis: 70%;
 		  }
-
+		  .dot1 {
+			height: 70px;
+			width: 70px;
+			background-color: red;
+			border-radius: 50%;
+			display: inline-block;
+		  }
+		  .dot2 {
+			height: 70px;
+			width: 70px;
+			background-color: red;
+			border-radius: 50%;
+			display: inline-block;
+		  }
+		  .dot3 {
+			height: 70px;
+			width: 70px;
+			background-color: red;
+			border-radius: 50%;
+			display: inline-block;
+		  }
 		  .ejection-button {
 			background-color: #FF0000;
 			color: #FFFFFF;
@@ -228,25 +248,6 @@
 					  }
 					}, 100);	
 					
-					// // super(x, y, 60, 95);
-					// // this.model = model;
-					// this.imageNum = 0;
-					// // this.countMario = 0;
-					// this.image.src = "rocket.jpeg";
-					// // this.jumpCount = 0;
-					// // this.marioScreenLocation = 150;
-					// // this.type = "mario";
-					// // this.vert_velocity = 0;
-					// this.images = [];
-					// this.imageNum = ["rocket.jpeg", "rocketRight1.jpeg", "rocketRight2.jpeg", "rocketRight3.jpeg", "rocketLeft1.jpeg", "rocketLeft2.jpeg", "rocketLeft3.jpeg"];
-					// for(let i = 0; i < this.imageNum.length; i++){
-					// 	this.images[i] = new Image();
-					// 	this.images[i].src = this.imageNum[i];
-					// }
-
-
-
-					/************************Show Image function************************/
 					function show_image(src){
 						var img = document.createElement("rocket.png");
 						
@@ -255,38 +256,6 @@
 						img.height = 10;
 						document.body.appendChild(img);
 					}
-					/********************************************************************/
-					// var xyValues = [
-					// {x:50, y:7},
-					// {x:60, y:8},
-					// {x:70, y:8},
-					// {x:80, y:9},
-					// {x:90, y:9},
-					// {x:100, y:9},
-					// {x:110, y:10},
-					// {x:120, y:11},
-					// {x:130, y:14},
-					// {x:140, y:14},
-					// {x:150, y:15}
-					// ];
-
-					// new Chart("orientation", {
-					// type: "scatter",
-					// data: {
-					// 	datasets: [{
-					// 	pointRadius: 4,
-					// 	// pointBackgroundColor: "rgb(0,0,255)",
-					// 	data: xyValues
-					// 	}]
-					// },
-					// options: {
-					// 	legend: {display: false},
-					// 	scales: {
-					// 	xAxes: [{ticks: {min: 40, max:160}}],
-					// 	yAxes: [{ticks: {min: 6, max:16}}],
-					// 	}
-					// }
-					// });
 				</script>
 			</body>
 		</div>
@@ -294,61 +263,16 @@
 			<p style="color:#008000">E-Match states: </p>
 			<!-- EMATCH waveforms -->
 			<body>
-				<canvas id="ematches"</canvas>
-				<script>
-					var chart = new Chart("ematches", {
-						type: 'scatter',
-						data: {
-							datasets: [
-							//Test dataset 1
-								{
-									data: [{x:1, y:0}, {x:1, y:1}, {x:3, y:1}, {x:3, y:0}],
-									borderColor: 'MediumSeaGreen',
-									borderWidth: 1,
-									fill: false,
-									tension: 0,
-									showLine: true
-								},
-							  
-								//Test dataset 2
-								{
-									data: [{x:4, y:0}, {x:4, y:1}, {x:5.5, y:1}, {x:5.5, y:0}],
-									borderColor: 'green',
-									borderWidth: 1,
-									fill: false,
-									tension: 0,
-									showLine: true
-								}
-							]
-						},
-					   options: {
-						  legend: false,
-						  tooltips: false,
-						  scales: {
-							 xAxes: [{
-								ticks: {
-								   min: 0,
-								   max: 10
-								},
-								gridLines: {
-									color: '#888',
-									drawOnChartArea: false
-								}
-							 }],
-							 yAxes: [{
-								ticks: {
-								   min: 0,
-								   max: 1,
-								   padding: 10
-								},
-								gridLines: {
-									drawOnChartArea: false
-								}
-							 }]
-						  }
-					   }
-					});
-				</script>
+				<!-- <canvas id="ematches"</canvas> -->
+					<br>
+					<span class="dot1" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 50px; vertical-align: middle;">Engine</p><br><br><br>
+					<span class="dot2" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 50px; vertical-align: middle;">Drogue</p><br><br><br>
+					<span class="dot3" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 50px; vertical-align: middle;">Parachute</p><br>
+
+
+
+
+					
 			</body>
 		</div>
 	</div>
