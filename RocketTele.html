@@ -156,42 +156,13 @@
 			<p style="color:#008000">GPS position: </p>
 			<!-- GPS graphic -->
 			<body>
-				<canvas id="posGPS"></canvas>
+				<img width="75%" height="75%" style="margin-left:10%" src="sprites/gps.png" />
 				<script>
-					var xyValues = [
-					{x:0, y:0},
-					{x:10, y:10},
-					{x:20, y:20},
-					{x:30, y:25},
-					{x:35, y:40},
-					{x:40, y:50},
-					{x:50, y:55},
-					{x:60, y:80}
-					];
-
-					new Chart("posGPS", {
-					type: "scatter",
-					data: {
-						datasets: [{
-						pointRadius: 4,
-						pointBackgroundColor: "red",
-						data: xyValues,
-						showLine: true,
-						tension: 0,
-						borderColor: "red"
-						}]
-					},
-					options: {
-						legend: {display: false},
-						scales: {
-						x: [{ticks: {min: 0, max:100}}, {gridLines: {zeroLineColor: "white"}}],
-						y: [{ticks: {min: 0, max:100}}, {gridLines: {zeroLineColor: "white"}}],
-						}
-					}
-					});
+						
 				</script>
 			</body>
 		</div>
+		
 		<div  style="border:3px double green;" class="columnGraph">
 			<p style="color:#008000">Orientation: </p>
 			<!-- Orientation graphic -->
