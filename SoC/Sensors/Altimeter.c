@@ -1,44 +1,25 @@
-#include <stdio.h>
-#include <msp430.h> 
-#include <stdint.h>
+#include "Altimeter.h"
+#include <msp430.h>
 
-#define BMP388_I2C_ADDR 0x76
-#define BMP388_REG_CHIPID 0x00
-#define BMP388_REG_PRESS_MSB 0x04
-#define BMP388_REG_TEMP_MSB 0x07
-#define BMP388_REG_CMD 0x7E
-#define BMP388_CMD_MEASUREMENT 0x59
-#define pressure_sea_level 101325
-
-void i2c_init(void);
-bool bmp388_init(void);
-void bmp388_read_coefficients(void);
-void bmp388_start_measurement(void);
-uint32_t bmp388_read_pressure(void);
-uint32_t bmp388_read_temperature(void);
-
-// Global variables for calibration coefficients
-int16_t t1, t2, t3;
-int32_t p1, p2, p3, p4, p5, p6, p7, p8, p9;
 
 /**
- * altimeter.c
+ * altimeter.c test
  */
 int main(void)
 {
-	WDTCTL = WDTPW | WDTHOLD;	// stop watchdog timer
-	
-	i2c_init();
-	// Initialize the timer
-	timer_init();
+    WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
 
-	// Enable global interrupts
-	__bis_SR_register(GIE);
+    i2c_init();
+    // Initialize the timer
+    timer_init();
+
+    // Enable global interrupts
+    __bis_SR_register(GIE);
 
 
-	while (1);
-	
-	return 0;
+    while (1);
+
+    return 0;
 }
 
 /**
@@ -109,62 +90,6 @@ double bmp388_compensate_pressure(uint32_t raw_pressure, double temperature)
 }
 
 
-/**
- * I2C Read and Write functions for interacting with the sensor over I2C
- */
-/**
- * Write
- */
-void i2c_write(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t len)
-{
-    UCB0I2CSA = addr;
-
-    UCB0CTL1 |= UCTR | UCTXSTT; // Transmit mode and send start condition
-
-    while (!(UCB0IFG & UCTXIFG));
-    UCB0TXBUF = reg;
-
-    for (uint8_t i = 0; i < len; i++)
-    {
-        while (!(UCB0IFG & UCTXIFG));
-        UCB0TXBUF = data[i];
-    }
-
-    while (!(UCB0IFG & UCTXIFG));
-    UCB0CTL1 |= UCTXSTP; // Send stop condition
-
-    while (UCB0CTL1 & UCTXSTP);
-}
-
-/*
- * Read
- */
-void i2c_read(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t len)
-{
-    UCB0I2CSA = addr;
-
-    UCB0CTL1 |= UCTR | UCTXSTT; // Transmit mode and send start condition
-
-    while (!(UCB0IFG & UCTXIFG));
-    UCB0TXBUF = reg;
-
-    while (!(UCB0IFG & UCTXIFG));
-    UCB0CTL1 &= ~UCTR; // Receive mode
-    UCB0CTL1 |= UCTXSTT; // Send repeated start condition
-
-    for (uint8_t i = 0; i < len - 1; i++)
-    {
-        while (!(UCB0IFG & UCRXIFG));
-        data[i] = UCB0RXBUF;
-    }
-
-    UCB0CTL1 |= UCTXSTP; // Send stop condition
-    while (!(UCB0IFG & UCRXIFG));
-    data[len - 1] = UCB0RXBUF;
-
-    while (UCB0CTL1 & UCTXSTP);
-}
-
 /*
  * Timer and interrupt setup
  */
@@ -177,12 +102,10 @@ void timer_init(void)
 
 /*
  * Altitude timer interrupt
- * TODO: look into using the case statement for interrupt table(?)
  */
 #pragma vector=TIMER0_A0_VECTOR
 __interrupt void Timer_A0_ISR(void)
 {
-    //TODO: Remove the function call from the interrupt: raise a flag instead to allow the function to execute in main
     //Calculate Altitude
     if (bmp388_init())
     {
