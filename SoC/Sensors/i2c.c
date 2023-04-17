@@ -45,7 +45,8 @@ void i2c_write(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t len)
     while (!(UCB0IFG & UCTXIFG));
     UCB0TXBUF = reg;
 
-    for (uint8_t i = 0; i < len; i++)
+    uint8_t i = 0;
+    for (i; i < len; i++)
     {
         while (!(UCB0IFG & UCTXIFG));
         UCB0TXBUF = data[i];
@@ -70,7 +71,8 @@ void i2c_read(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t len)
     UCB0CTL1 &= ~UCTR; // Receive mode
     UCB0CTL1 |= UCTXSTT; // Send repeated start condition
 
-    for (uint8_t i = 0; i < len - 1; i++)
+    uint8_t i = 0;
+    for (i; i < len - 1; i++)
     {
         while (!(UCB0IFG & UCRXIFG));
         data[i] = UCB0RXBUF;
