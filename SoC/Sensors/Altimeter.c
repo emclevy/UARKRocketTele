@@ -1,20 +1,10 @@
 #include "Altimeter.h"
+#include "i2c.h"
 #include <msp430.h>
 
 
 /**
  * altimeter.c test
- 
- 
- // set external clock frequency for XT2IN (24Mhz)
-    UCS_setExternalClockSource(0, 24000000);
-
-    // powerdown XT2 and accept external clock on XT2IN
-    UCS_bypassXT2();
-    // enable XT2IN/XT2OUT pins
-    P5SEL |= (BIT2 | BIT3);
-    // initialize SMCLK to use XT2IN as source
-    UCS_initClockSignal(UCS_SMCLK, UCS_XT2CLK_SELECT, UCS_CLOCK_DIVIDER_2);
  */
 int main(void)
 {
@@ -22,7 +12,7 @@ int main(void)
 
     i2c_init();
     // Initialize the timer
-    timer_init();
+    //timer_init();
 
     // Enable global interrupts
     __bis_SR_register(GIE);
@@ -34,7 +24,7 @@ int main(void)
                 bmp388_read_coefficients();
                 bmp388_start_measurement();
 
-                uint32_t pressure = bmp388_read_pressure();
+                uint32_t raw_pressure = bmp388_read_pressure();
                 uint32_t temperature = bmp388_read_temperature();
 
                 // Calculate altitude and transmit telemetry data
@@ -52,6 +42,8 @@ int main(void)
 /**
  * Initialize altimeter
  */
+
+/*
 void i2c_init(void)
 {
     P4SEL |= BIT1 | BIT2; // Assign I2C pins to USCI_B0 IMU/ALT_SCL and SDA is on pins 4.1/4.2
@@ -62,6 +54,7 @@ void i2c_init(void)
     UCB0BR1 = 0;
     UCB0CTL1 &= ~UCSWRST; // Clear SW reset, resume operation
 }
+*/
 
 /**
  * check if sensor is setup or not
@@ -95,8 +88,8 @@ void bmp388_read_coefficients(void)
     p5 = (buffer[15] << 8) | buffer[14];
     p6 = (buffer[17] << 8) | buffer[16];
     p7 = (buffer[19] << 8) | buffer[18];
-    p8 = (buffer[21] << 8) | buffer[20];
-    p9 = (buffer[23] << 8) | buffer[22];
+    //p8 = (buffer[21] << 8) | buffer[20];
+    //p9 = (buffer[23] << 8) | buffer[22];
 }
 
 /*
