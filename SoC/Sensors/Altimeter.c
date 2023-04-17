@@ -17,7 +17,23 @@ int main(void)
     __bis_SR_register(GIE);
 
 
-    while (1);
+    while (1){
+        if (bmp388_init())
+            {
+                bmp388_read_coefficients();
+                bmp388_start_measurement();
+
+                uint32_t pressure = bmp388_read_pressure();
+                uint32_t temperature = bmp388_read_temperature();
+
+                // Calculate altitude and transmit telemetry data
+                double pressure = bmp388_compensate_pressure(raw_pressure, temperature);
+                double altitude = calculate_altitude(pressure, 101325); //101325 is typical pressure for sea level -- will want to verify that it is 0'd or close to 0 on ground
+                printf("%d\n", altitude); //TODO altitude data into the transceiver buffer for send
+                __delay_cycles(8000000);
+            }
+        //else the sensor did not initialize
+    }
 
     return 0;
 }
@@ -107,18 +123,5 @@ void timer_init(void)
 __interrupt void Timer_A0_ISR(void)
 {
     //Calculate Altitude
-    if (bmp388_init())
-    {
-        bmp388_read_coefficients();
-        bmp388_start_measurement();
 
-        uint32_t pressure = bmp388_read_pressure();
-        uint32_t temperature = bmp388_read_temperature();
-
-        // Calculate altitude and transmit telemetry data
-        double pressure = bmp388_compensate_pressure(raw_pressure, temperature);
-        double altitude = calculate_altitude(pressure, 101325); //101325 is typical pressure for sea level -- will want to verify that it is 0'd or close to 0 on ground
-        printf("%d\n", altitude); //TODO altitude data into the transceiver buffer for send
-
-    }
 }
