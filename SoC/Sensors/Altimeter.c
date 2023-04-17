@@ -4,6 +4,17 @@
 
 /**
  * altimeter.c test
+ 
+ 
+ // set external clock frequency for XT2IN (24Mhz)
+    UCS_setExternalClockSource(0, 24000000);
+
+    // powerdown XT2 and accept external clock on XT2IN
+    UCS_bypassXT2();
+    // enable XT2IN/XT2OUT pins
+    P5SEL |= (BIT2 | BIT3);
+    // initialize SMCLK to use XT2IN as source
+    UCS_initClockSignal(UCS_SMCLK, UCS_XT2CLK_SELECT, UCS_CLOCK_DIVIDER_2);
  */
 int main(void)
 {
