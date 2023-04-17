@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <msp430.h>
 #include <stdint.h>
+#include <stdbool.h>
 
 #define BMP388_I2C_ADDR 0x76
 #define BMP388_REG_CHIPID 0x00
