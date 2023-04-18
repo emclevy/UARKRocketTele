@@ -15,7 +15,6 @@ function display(){
         var boost1 = document.getElementById('Boost1');
         var boost2 = document.getElementById('Boost2');
         var boost3 = document.getElementById('Boost3');
-        var volt = document.getElementById('Volt');
 
     
         //get value for speed
@@ -45,25 +44,6 @@ function display(){
         } else if(boost3.value < 48 && boost2.value === 32){
             boost3.value++;
         }
-
-
-        //assigns a voltage value
-        //assigns a voltage value
-        var vv = volt.value;
-        if (spee < 25) {
-          vv = 1.3;
-        } else if (spee >= 25 && spee < 40) {
-          vv += 0.005;
-          if (vv > 1.8) {
-            vv = 1.8;
-          }
-        } else if (spee >= 40) {
-          vv -= 0.005;
-          if (vv < 1.3) {
-            vv = 1.3;
-          }
-        }
-        volt.value = vv;
         
 
         //gets peak speed
@@ -91,17 +71,12 @@ function display(){
     boost3.value++;
   }
 
-        //voltage
-        if(speed.value >= 25){
-            volt.value = 1.8 ;
-        }
 
-        
+   
 
         //resets testing back to 0 
         if(speed.value == 50) {
             speed.value = 0;
-            volt.value = 0; /* added this to show a change in voltgage */
             clearInterval(count);
         }
         if(acceleration.value == 50) {

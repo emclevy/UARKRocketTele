@@ -9,38 +9,25 @@
 		  box-sizing: border-box;
 		}
 		p {
-			font-size: 20px;
+			font-size: 115%;
 		}
 		.form-field {
 			display: flex;
 			justify-content: space-between;
 			align-items: center;
-			margin-bottom: 10px;
+			margin-bottom: 3%;
+			margin-right: 10%;
 		  }
 		  .form-field label {
-			margin-right: 10px;
+			margin-right: 1%;
 			flex-basis: 30%;
 		  }
 		  .form-field input[type="text"] {
 			flex-basis: 70%;
 		  }
-		  .dot1 {
-			height: 70px;
-			width: 70px;
-			background-color: red;
-			border-radius: 50%;
-			display: inline-block;
-		  }
-		  .dot2 {
-			height: 70px;
-			width: 70px;
-			background-color: red;
-			border-radius: 50%;
-			display: inline-block;
-		  }
-		  .dot3 {
-			height: 70px;
-			width: 70px;
+		  .dot {
+			height: 12.5%;
+			width: 12.5%;
 			background-color: red;
 			border-radius: 50%;
 			display: inline-block;
@@ -52,7 +39,7 @@
 			width: 20%;
 			height: auto;
 			font-size: 110%;
-			line-height: 125px;
+			line-height: 667%;
 			text-align: center;
 			text-transform: uppercase;
 			box-shadow: 0px 3px 3px #888888, inset 0px 2px 2px rgba(255,255,255,0.5);
@@ -68,7 +55,6 @@
 			top: 0px;
 			left: 0px;
 			border-radius: 50%;
-			background: rgba(255,255,255,0.3);
 			
 		  }
 		  
@@ -81,7 +67,6 @@
 			left: 20%;
 			border-radius: 50%;
 			background: rgba(255,255,255,0.3);
-			box-shadow: 0px 1px 1px rgba(0,0,0,0.5), inset 0px 1px 1px rgba(255,255,255,0.5);
 		  }
 		  
 		  .ejection-button:hover {
@@ -115,19 +100,6 @@
 		  display: table;
 		  clear: both;
 		}
-		.button {
-			background-color: red; /* Green */
-			border: none;
-			color: white;
-			padding: 20px;
-			text-align: center;
-			text-decoration: none;
-			display: inline-block;
-			font-size: 16px;
-			margin: 4px 2px;
-
-		  }
-		.button{border-radius: 50%;}
 	</style>
 </head>
 
@@ -141,14 +113,13 @@
 			<p class="form-field" style="color:#008000">  <label for="Boost1">Booster 1 time:</label> <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
 			<p class="form-field" style="color:#008000">  <label for="Boost2">Booster 2 time:</label> <input type="text" id="Boost2" name="Boost2" readonly="true" /></p>
 			<p class="form-field" style="color:#008000">  <label for="Boost3">Booster 3 time:</label> <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
-			<p class="form-field" style="color:#008000">  <label for="Volt">System Voltage:</label> <input type="text" id="Volt" name="Volt" readonly="true" /> </p>
 		</div>
 		<div  style="border:3px double green;padding-left:2%;padding-right:2%;" class="columnData"><h2 style="color:#008000">Peak data - </h2>
 			<p class="form-field"style="color:#008000"> <label for="PAlti">Altitude:</label> <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
 			<p class="form-field"style="color:#008000"> <label for="Pspeed">Speed:</label> <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
 			<p class="form-field"style="color:#008000"> <label for="PAccel">Acceleration:</label> <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
 			<p class="form-field"style="color:#008000"> <label for="Eject">Ejection Altitude:</label> <input type="text" id="Eject" name="Eject" readonly="true" /></p>
-			<p><button class="ejection-button">DROGUE</button>"      "<button class="ejection-button">PARA</button></p>
+			<p><button class="ejection-button">DROGUE</button>"      "<button class="ejection-button">CHUTE</button></p>
 		
 		</div>
 	</div> 
@@ -157,7 +128,6 @@
 			<p style="color:#008000">GPS position: </p>
 			<!-- GPS graphic -->
 			<body>
-				<!-- <img width="75%" height="75%" style="margin-left:10%" src="sprites/gps.png" /> -->
 				<canvas id="gps" style="width:85%; height:85%; margin-left:7%"></canvas>
 				<script>
 						var gpsCanv = document.getElementById("gps");
@@ -185,11 +155,11 @@
 						
 						if(prevGPSX < gpsImgs[0].width - 267) {
 							gpsX++;
-							console.log("Current gps X: " + gpsX);
+							<!-- console.log("Current gps X: " + gpsX); -->
 						}
 						if(prevGPSY < gpsImgs[0].height - 410) {
 							gpsY++;
-							console.log("Current GPS Y: " + gpsY);
+							<!-- console.log("Current GPS Y: " + gpsY); -->
 						}
 						//Redraw GPS background
 						gpsCtx.drawImage(gpsImgs[0], 0, 0, gpsCanv.width, gpsCanv.height);
@@ -205,58 +175,61 @@
 			<p style="color:#008000">Orientation: </p>
 			<!-- Orientation graphic -->
 			<body>
-				<canvas id="orientation" style="width:100%; height = 100%"></canvas>
+				<canvas id="orientation" style="width:85%; height:85%; margin-left:7.5%"></canvas>
 				<script>
-					var canvas = document.getElementById('orientation');
-					var ctx = canvas.getContext('2d');
+					var rktCanv = document.getElementById('orientation');
+					var rktCtx = rktCanv.getContext('2d');
 					
-					var images = [];
-					images.length = 5;
+					var rktImg = new Image();
+					rktImg.src = "sprites/rocket.png";
 					
-					for (var i = 1; i < images.length; i++) {
-					  images[i] = new Image();
-					  images[i].src = 'sprites/rocketship' + i.toString() + '.png';
-					}
+					var rktTilt = 0;
+					var rktAspect, rktMaxW, rktMaxH, rktW, rktH, rktX, rktY;
 					
-					var x = 0;
-					var i = 1;
+					
+					//Draw the rocket once the source has loaded
+					rktImg.addEventListener("load", function() {
+						rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
+
+						rktAspect = rktImg.width / rktImg.height;
+
+						//Calculate the maximum size of the sprite image based on the canvas size
+						rktMaxW = rktCanv.width * 1.4;
+						rktMaxH = rktCanv.height * 1.4;
+
+						// Calculate the width and height of the sprite image based on the aspect ratio and canvas size
+						rktW = Math.min(rktMaxW, rktMaxH * rktAspect);
+						rktH = Math.min(rktMaxH, rktMaxW * rktAspect);
+
+						// Calculate the position to draw the sprite image based on the canvas size and sprite size
+						rktX = (rktCanv.width - rktW) / 2;
+						rktY = (rktCanv.height - rktH) / 2;
+
+						// Draw the sprite image with the adjusted size and position
+						rktCtx.drawImage(rktImg, rktX, rktY, rktW, rktH);
+						
+					}, false);
 					
 					setInterval(function() {
-					  ctx.clearRect(0, 0, canvas.width, canvas.height);
-
-					  var img = images[i];
-					  var aspectRatio = img.width / img.height;
-					
-					  //Calculate the maximum size of the sprite image based on the canvas size
-					  var maxWidth = canvas.width * 1.2;
-					  var maxHeight = canvas.height * 1.2;
-					
-					  // Calculate the width and height of the sprite image based on the aspect ratio and canvas size
-					  var width = Math.min(maxWidth, maxHeight * aspectRatio);
-					  var height = Math.min(maxHeight, maxWidth / aspectRatio);
-					
-					  // Calculate the position to draw the sprite image based on the canvas size and sprite size
-					  var xPosition = (canvas.width - width) / 2;
-					  var yPosition = (canvas.height - height) / 2;
-					
-					  // Draw the sprite image with the adjusted size and position
-					  ctx.drawImage(img, xPosition, yPosition, width, height);
-					  // Increase x value
-					  x = 10;
-					
-					  // Check if x value is above a certain threshold and change sprite image accordingly
-					  if (x >= 50 && x < 100) {
-						i = 2;
-					  } else if (x >= 100 && x < 150) {
-						i = 3;
-					  } else if (x >= 150 && x < 200) {
-						i = 4;
-					  } else if (x >= 200) {
-						i = 5;
-					  } else {
-						i = 1;
-					  }
-					}, 100);	
+						var prevTilt = rktTilt;
+						rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
+						
+						rktTilt += 1;
+						
+						rktCtx.translate(rktX + rktW / 2, rktY + rktH / 2);
+						
+						//Remove previous tilt so rotation stays linear
+						rktCtx.rotate(-prevTilt*Math.PI/180);
+						//Apply new rotation
+						rktCtx.rotate(rktTilt*Math.PI/180);
+						
+						rktCtx.translate(-(rktX + rktW / 2), -(rktY + rktH / 2));
+						
+						rktCtx.drawImage(rktImg, rktX, rktY, rktW, rktH);
+						
+						
+						
+					}, 250);	
 				</script>
 			</body>
 		</div>
@@ -265,9 +238,9 @@
 			<!-- EMATCH waveforms -->
 			<body>
 					<br>
-					<span class="dot1" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 50px; vertical-align: middle;">Engine</p><br><br><br>
-					<span class="dot2" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 50px; vertical-align: middle;">Drogue</p><br><br><br>
-					<span class="dot3" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 50px; vertical-align: middle;">Parachute</p><br>
+					<span class="dot" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 5%; vertical-align: middle;">Engine</p><br><br><br>
+					<span class="dot" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 5%; vertical-align: middle;">Drogue</p><br><br><br>
+					<span class="dot" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 5%; vertical-align: middle;">Parachute</p><br>
 			</body>
 		</div>
 	</div>
