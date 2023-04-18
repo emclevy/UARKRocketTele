@@ -141,32 +141,35 @@
 						gpsImgs[1] = new Image();
 						gpsImgs[1].src = "sprites/gpsdot.png";
 						
+						//Draw graph background once source has loaded
 						gpsImgs[0].addEventListener("load", function() {
 							gpsCtx.drawImage(gpsImgs[0], 0, 0, gpsCanv.width, gpsCanv.height);
 						}, false);
 						
+						//Centers the blip at the origin
 						var gpsX = gpsCanv.width/2;
 						var gpsY = gpsCanv.height/2;
 						
-					setInterval(function() {
-						var prevGPSX = gpsX;
-						var prevGPSY = gpsY;
-						gpsCtx.clearRect(prevGPSX, prevGPSY, gpsCanv.width/50, gpsCanv.height/50);
-						
-						if(prevGPSX < gpsImgs[0].width - 267) {
-							gpsX++;
-							<!-- console.log("Current gps X: " + gpsX); -->
-						}
-						if(prevGPSY < gpsImgs[0].height - 410) {
-							gpsY++;
-							<!-- console.log("Current GPS Y: " + gpsY); -->
-						}
-						//Redraw GPS background
-						gpsCtx.drawImage(gpsImgs[0], 0, 0, gpsCanv.width, gpsCanv.height);
-						//Redraw GPS blip to reflect new coordinates
-						gpsCtx.drawImage(gpsImgs[1], gpsX, gpsY, gpsCanv.width/50, gpsCanv.height/50);
-						
-					}, 50);	
+						//Update blip to reflect new relative position
+						setInterval(function() {
+							var prevGPSX = gpsX;
+							var prevGPSY = gpsY;
+							gpsCtx.clearRect(prevGPSX, prevGPSY, gpsCanv.width/50, gpsCanv.height/50);
+							
+							if(prevGPSX < gpsImgs[0].width - 267) {
+								gpsX++;
+								<!-- console.log("Current gps X: " + gpsX); -->
+							}
+							if(prevGPSY < gpsImgs[0].height - 410) {
+								gpsY++;
+								<!-- console.log("Current GPS Y: " + gpsY); -->
+							}
+							//Redraw GPS background
+							gpsCtx.drawImage(gpsImgs[0], 0, 0, gpsCanv.width, gpsCanv.height);
+							//Redraw GPS blip to reflect new coordinates
+							gpsCtx.drawImage(gpsImgs[1], gpsX, gpsY, gpsCanv.width/50, gpsCanv.height/50);
+							
+						}, 50);	
 				</script>
 			</body>
 		</div>
@@ -187,7 +190,7 @@
 					var rktAspect, rktMaxW, rktMaxH, rktW, rktH, rktX, rktY;
 					
 					
-					//Draw the rocket once the source has loaded
+					//Draw the rocket's initial orientation once the source image has loaded
 					rktImg.addEventListener("load", function() {
 						rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
 
@@ -210,6 +213,8 @@
 						
 					}, false);
 					
+					
+					//Update orientation display
 					setInterval(function() {
 						var prevTilt = rktTilt;
 						rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
@@ -226,8 +231,6 @@
 						rktCtx.translate(-(rktX + rktW / 2), -(rktY + rktH / 2));
 						
 						rktCtx.drawImage(rktImg, rktX, rktY, rktW, rktH);
-						
-						
 						
 					}, 250);	
 				</script>
