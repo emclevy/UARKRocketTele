@@ -30,7 +30,7 @@ int main(void)
                 // Calculate altitude and transmit telemetry data
                 double pressure = bmp388_compensate_pressure(raw_pressure, temperature);
                 double altitude = calculate_altitude(pressure, 101325); //101325 is typical pressure for sea level -- will want to verify that it is 0'd or close to 0 on ground
-                printf("%d\n", altitude); //TODO altitude data into the transceiver buffer for send
+                //printf("%d\n", altitude); //TODO altitude data into the transceiver buffer for send
                 __delay_cycles(8000000);
             }
         //else the sensor did not initialize
@@ -99,6 +99,25 @@ void bmp388_start_measurement(void)
 {
     uint8_t cmd = BMP388_CMD_MEASUREMENT; //register for starting reading measurement - defined in data sheet
     i2c_write(BMP388_I2C_ADDR, BMP388_REG_CMD, &cmd, 1);
+}
+
+double calculate_altitude(double pressure, double pressure_sea_level_p)
+{
+    return 44330.0 * (1.0 - pow((pressure / pressure_sea_level_p), 1.0/5.255));
+}
+
+uint32_t bmp388_read_pressure(void)
+{
+    uint8_t buffer[3];
+    i2c_read(BMP388_I2C_ADDR, BMP388_REG_PRESS_MSB, buffer, 3);
+    return (uint32_t)buffer[0] << 16 | (uint32_t)buffer[1] << 8 | buffer[2];
+}
+
+uint32_t bmp388_read_temperature(void)
+{
+    uint8_t buffer[3];
+    i2c_read(BMP388_I2C_ADDR, BMP388_REG_TEMP_MSB, buffer, 3);
+    return (uint32_t)buffer[0] << 16 | (uint32_t)buffer[1] << 8 | buffer[2];
 }
 
 /*
