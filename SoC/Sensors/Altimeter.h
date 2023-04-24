@@ -12,6 +12,7 @@
 #include <msp430.h>
 #include <stdint.h>
 #include <stdbool.h>
+#include <math.h>
 
 #define BMP388_I2C_ADDR 0x76
 #define BMP388_REG_CHIPID 0x00
@@ -27,15 +28,13 @@ void bmp388_read_coefficients(void);
 void bmp388_start_measurement(void);
 uint32_t bmp388_read_pressure(void);
 uint32_t bmp388_read_temperature(void);
+double calculate_altitude(double pressure, double pressure_sea_level_p);
 
 // Global variables for calibration coefficients
 int16_t t1, t2, t3;
 int32_t p1, p2, p3, p4, p5, p6, p7, p8, p9;
 
 
-bool bmp388_init(void);
-void bmp388_read_coefficients(void);
-void bmp388_start_measurement(void);
 double bmp388_compensate_pressure(uint32_t raw_pressure, double temperature);
 
 #endif /* ALTIMETER_H_ */
