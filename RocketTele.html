@@ -2,105 +2,8 @@
 <head>
 	<title>UARK Rocket Telemetry</title>
 	<meta charset = "UTF-8">
-	<script src="RocketTele.js"></script>
-	<script src="Chart.js"></script>
-	<style>
-		* {
-		  box-sizing: border-box;
-		}
-		p {
-			font-size: 115%;
-		}
-		.form-field {
-			display: flex;
-			justify-content: space-between;
-			align-items: center;
-			margin-bottom: 3%;
-			margin-right: 10%;
-		  }
-		  .form-field label {
-			margin-right: 1%;
-			flex-basis: 30%;
-		  }
-		  .form-field input[type="text"] {
-			flex-basis: 70%;
-		  }
-		  .dot {
-			height: 12.5%;
-			width: 12.5%;
-			background-color: red;
-			border-radius: 50%;
-			display: inline-block;
-		  }
-		  .ejection-button {
-			background-color: #FF0000;
-			color: #FFFFFF;
-			border-radius: 50%;
-			width: 20%;
-			height: auto;
-			font-size: 110%;
-			line-height: 667%;
-			text-align: center;
-			text-transform: uppercase;
-			box-shadow: 0px 3px 3px #888888, inset 0px 2px 2px rgba(255,255,255,0.5);
-			background: linear-gradient(to bottom, #FF0000, #8B0000);
-			position: relative;
-		  }
-		  
-		  .ejection-button:before {
-			content: "";
-			width: 100%;
-			height: 50%;
-			position: absolute;
-			top: 0px;
-			left: 0px;
-			border-radius: 50%;
-			
-		  }
-		  
-		  .ejection-button:after {
-			content: "";
-			width: 60%;
-			height: 60%;
-			position: absolute;
-			top: 20%;
-			left: 20%;
-			border-radius: 50%;
-			background: rgba(255,255,255,0.3);
-		  }
-		  
-		  .ejection-button:hover {
-			background: linear-gradient(to bottom, #CC0000, #8B0000);
-			cursor: pointer;
-		  }
-		  
-		  
-
-		 /************************/
-		.columnData {
-		  float: left;
-		  background-color: black;
-		  width: 50%;
-		  height: 45%;
-		  padding-left: 2%;
-		  padding-right: 2%;
-		}
-		.columnGraph {
-		  float: left;
-		  background-color: black;
-		  width: 33.33%;
-		  height: 55%;
-		  padding-left: 2%;
-		  padding-right: 2%;
-		  
-		}
-		/* Clear floats after the columns */
-		.row:after {
-		  content: "";
-		  display: table;
-		  clear: both;
-		}
-	</style>
+	<script src="javascript/LiveData.js"></script>
+	<link rel="stylesheet" href="RocketTele.css">
 </head>
 
 
@@ -129,48 +32,7 @@
 			<!-- GPS graphic -->
 			<body>
 				<canvas id="gps" style="width:85%; height:85%; margin-left:7%"></canvas>
-				<script>
-						var gpsCanv = document.getElementById("gps");
-						var gpsCtx = gpsCanv.getContext("2d");
-						
-						var gpsImgs = [];
-						gpsImgs.length = 2;
-						
-						gpsImgs[0] = new Image();
-						gpsImgs[0].src = "sprites/gps.png";
-						gpsImgs[1] = new Image();
-						gpsImgs[1].src = "sprites/gpsdot.png";
-						
-						//Draw graph background once source has loaded
-						gpsImgs[0].addEventListener("load", function() {
-							gpsCtx.drawImage(gpsImgs[0], 0, 0, gpsCanv.width, gpsCanv.height);
-						}, false);
-						
-						//Centers the blip at the origin
-						var gpsX = gpsCanv.width/2;
-						var gpsY = gpsCanv.height/2;
-						
-						//Update blip to reflect new relative position
-						setInterval(function() {
-							var prevGPSX = gpsX;
-							var prevGPSY = gpsY;
-							gpsCtx.clearRect(prevGPSX, prevGPSY, gpsCanv.width/50, gpsCanv.height/50);
-							
-							if(prevGPSX < gpsImgs[0].width - 267) {
-								gpsX++;
-								<!-- console.log("Current gps X: " + gpsX); -->
-							}
-							if(prevGPSY < gpsImgs[0].height - 410) {
-								gpsY++;
-								<!-- console.log("Current GPS Y: " + gpsY); -->
-							}
-							//Redraw GPS background
-							gpsCtx.drawImage(gpsImgs[0], 0, 0, gpsCanv.width, gpsCanv.height);
-							//Redraw GPS blip to reflect new coordinates
-							gpsCtx.drawImage(gpsImgs[1], gpsX, gpsY, gpsCanv.width/50, gpsCanv.height/50);
-							
-						}, 50);	
-				</script>
+				<script src="javascript/GPS.js"></script>
 			</body>
 		</div>
 		
@@ -179,61 +41,7 @@
 			<!-- Orientation graphic -->
 			<body>
 				<canvas id="orientation" style="width:85%; height:85%; margin-left:7.5%"></canvas>
-				<script>
-					var rktCanv = document.getElementById('orientation');
-					var rktCtx = rktCanv.getContext('2d');
-					
-					var rktImg = new Image();
-					rktImg.src = "sprites/rocket.png";
-					
-					var rktTilt = 0;
-					var rktAspect, rktMaxW, rktMaxH, rktW, rktH, rktX, rktY;
-					
-					
-					//Draw the rocket's initial orientation once the source image has loaded
-					rktImg.addEventListener("load", function() {
-						rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
-
-						rktAspect = rktImg.width / rktImg.height;
-
-						//Calculate the maximum size of the sprite image based on the canvas size
-						rktMaxW = rktCanv.width * 1.4;
-						rktMaxH = rktCanv.height * 1.4;
-
-						// Calculate the width and height of the sprite image based on the aspect ratio and canvas size
-						rktW = Math.min(rktMaxW, rktMaxH * rktAspect);
-						rktH = Math.min(rktMaxH, rktMaxW * rktAspect);
-
-						// Calculate the position to draw the sprite image based on the canvas size and sprite size
-						rktX = (rktCanv.width - rktW) / 2;
-						rktY = (rktCanv.height - rktH) / 2;
-
-						// Draw the sprite image with the adjusted size and position
-						rktCtx.drawImage(rktImg, rktX, rktY, rktW, rktH);
-						
-					}, false);
-					
-					
-					//Update orientation display
-					setInterval(function() {
-						var prevTilt = rktTilt;
-						rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
-						
-						rktTilt += 1;
-						
-						rktCtx.translate(rktX + rktW / 2, rktY + rktH / 2);
-						
-						//Remove previous tilt so rotation stays linear
-						rktCtx.rotate(-prevTilt*Math.PI/180);
-						//Apply new rotation
-						rktCtx.rotate(rktTilt*Math.PI/180);
-						
-						rktCtx.translate(-(rktX + rktW / 2), -(rktY + rktH / 2));
-						
-						rktCtx.drawImage(rktImg, rktX, rktY, rktW, rktH);
-						
-					}, 250);	
-				</script>
+				<script src="javascript/Orientation.js"></script>
 			</body>
 		</div>
 		<div  style="border:3px double green;" class="columnGraph">
