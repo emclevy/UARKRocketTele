@@ -9,6 +9,7 @@
 #include <msp430.h>
 #include "i2c.h"
 
+// Define MPU-6500 registers, I2C address, and other constants here
 
 void MPU6500_init()
 {
