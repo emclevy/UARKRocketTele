@@ -70,6 +70,7 @@ void i2c_read(uint8_t addr, uint8_t reg, uint8_t *data, uint8_t len)
     while (!(UCB0IFG & UCTXIFG));
     UCB0CTL1 &= ~UCTR; // Receive mode
     UCB0CTL1 |= UCTXSTT; // Send repeated start condition
+   
 
     uint8_t i = 0;
     for (i; i < len - 1; i++)
