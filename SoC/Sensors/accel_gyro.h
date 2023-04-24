@@ -12,6 +12,7 @@
 
 #define MPU6500_ADDRESS 0x68 // MPU-6500 I2C address (AD0 pin low)
 
+
 // MPU-6500 Register Addresses
 #define MPU6500_PWR_MGMT_1 0x6B
 #define MPU6500_CONFIG 0x1A
