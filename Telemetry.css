@@ -52,6 +52,7 @@
 	.red-dot {
 		height: 12.5%;
 		width: 7.5%;
+		margin-bottom: 2%;
 		vertical-align: middle;
 		background-color: red;
 		border-radius: 50%;
@@ -61,6 +62,7 @@
 	.green-dot {
 		height: 12.5%;
 		width: 7.5%;
+		margin-bottom: 2%;
 		vertical-align: middle;
 		background-color: green;
 		border-radius: 50%;
@@ -70,6 +72,7 @@
 	.gray-dot {
 		height: 12.5%;
 		width: 7.5%;
+		margin-bottom: 2%;
 		vertical-align: middle;
 		background-color: gray;
 		border-radius: 50%;

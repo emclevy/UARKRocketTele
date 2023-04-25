@@ -25,16 +25,16 @@
 				<input type="text" id="Accel" name="Accel" value="0 Gs" readonly="true" />
 			</p>
 			<p id="fileInField" class="form-field">
-				<label for="dataInput">Select test data</label>
-				<input type="file" id="dataInput" style="flex-basis: 70%" onchange="loadData(this)">
+				<label for="dataInput" style="padding-bottom: 2%">Select test data</label>
+				<input type="file" id="dataInput" style="flex-basis: 70%; padding-bottom: 2%" onchange="loadData(this)">
 			</p>
 			<!-- Upon successfully loading file, hide the input box and inform the user. -->
-			<p id="fileLoaded" hidden=true style="margin-left: auto">
+			<p id="fileLoaded" hidden=true style="margin-left: auto; padding-bottom: 2%">
 				Successfully loaded test data.
 			</p>
 			<span id="launchLight" class="red-dot"></span><p style="display: inline-block">Launched</p>
 			<span id="landLight" class="gray-dot"></span><p style="display: inline-block">Landed</p>
-			<br><br>
+			<br>
 			<span id="apogeeLight" class="gray-dot"></span><p style="display: inline-block">Apogee<br>reached</p>
 			<span id="drogueLight" class="gray-dot"></span><p style="display: inline-block">Drogue<br>ejected</p>
 			<span id="chuteLight" class="gray-dot"></span><p style="display: inline-block">Parachute<br>ejected</p>
