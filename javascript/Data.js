@@ -1,70 +1,58 @@
-
-// let count = setInterval(display, 300);
-//let end = 15;
-// function display(){
-	// //live data variables
-	// var acceleration = document.getElementById('Accel');
-	// var speed = document.getElementById('Vel');
-	// //var altitude = document.getElementById('')
-	// //peak variables
-	// var peakAcceleration = document.getElementById('PAccel');
-	// var peakSpeed = document.getElementById('PSpeed');
-	// var peakAltitude = document.getElementById('PAlti');
-	// var ejectAlt = document.getElementById('Eject');
-	
+var dataLoaded = 0;
+var launched = 0;
 
 
-	// //get value for speed
-	// var spee = parseFloat(speed.value);
-	// spee++
-	// speed.value = spee.toFixed(2) + " m/s"; // Replace "units" with the actual units (e.g., "m/s")
+//Loads in file from selected source (should always be "realtime.csv" in our case, if not, warn user and don't load)
+function loadData(input) {
+	if(input.files[0].name != "realtime.csv")
+		alert("Program can currently only simulate over realtime.csv.");
+	else {
+		var dataFile = input.files[0];
 
-	
-	// //get value for acc
-	// var acc = parseFloat(acceleration.value);
-	// acc++
-	// acceleration.value = acc.toFixed(2) + " m/s²";
+		var dataReader = new FileReader();
 
-	
-	// //get value for alt
-	// var alt = 0;
-	// alt++
-	// // altitude.value = alt;
-	// // peakAltitude = alt;
-	
+		dataReader.readAsText(dataFile);
 
-	// //gets peak speed
-	// if(peakSpeed.value <= spee) {
-		// peakSpeed.value = spee;
-	// }
-	// //gets peak acceleration value
-	// if(peakAcceleration.value <= acc) {
-		// peakAcceleration.value = acc;
-	// }
-	// //gets peak alt
-	// if(peakAltitude.value <= alt){
-		// peakAltitude.value = alt;
-	// }
+		dataReader.onload = function() {
+			console.log(dataReader.result);
+		}
 
+		dataReader.onerror = function() {
+			console.log(dataReader.error);
+		}
+		
+		dataLoaded = 1;
+		document.getElementById("fileInField").remove();
+		document.getElementById("fileLoaded").hidden = false;
+	}
+}
 
-	// //resets testing back to 0 
-	// if(speed.value == 50) {
-		// speed.value = 0;
-		// clearInterval(count);
-	// }
-	// if(acceleration.value == 50) {
-		// acceleration.value = 0;
-		// clearInterval(count);
-	// }
-// }
 
 
 function beginLaunch() {
-	var eLight = document.getElementById("engineLight");
 	var lButton = document.getElementById("launchButton");
+	var dButton = document.getElementById("drogueButton");
+	var cButton = document.getElementById("chuteButton");
 	
-	eLight.setAttribute("class", "green-dot");
+	var lLight = document.getElementById("launchLight");
+	var aLight = document.getElementById("apogeeLight");
+	var dLight = document.getElementById("drogueLight");
+	var cLight = document.getElementById("chuteLight");
 	
+	//Initiate rocket launch simulation
+	if(!launched && dataLoaded) {
+		lLight.setAttribute("class", "green-dot");
+		lButton.setAttribute("class", "button-grayed");
+		dButton.setAttribute("class", "button-active");
+		dLight.setAttribute("class", "red-dot");
+		cButton.setAttribute("class", "button-active");
+		cLight.setAttribute("class", "red-dot");
+		aLight.setAttribute("class", "red-dot");
+		launched = 1;
+	}
+	else if(!dataLoaded) {
+		alert("Please select launch data to simulate.");
+	}
 }
 
 //Upon pressing the button to eject the drogue parachute, change ejection light to green and remove "Eject drogue" button
@@ -72,7 +60,11 @@ function toggleDrogue() {
 	var dLight = document.getElementById("drogueLight");
 	var dButton = document.getElementById("drogueButton");
 	
-	dLight.setAttribute("class", "green-dot");
+	//If rocket has been launched, allow marking the drogue as deployed
+	if(launched) {
+		dLight.setAttribute("class", "green-dot");
+		dButton.setAttribute("class", "button-grayed");
+	}
 }
 
 //Upon pressing the button to eject the primary parachute, change ejection light to green and remove "Eject chute" button
@@ -80,12 +72,12 @@ function toggleChute() {
 	var cLight = document.getElementById("chuteLight");
 	var cButton = document.getElementById("chuteButton");
 	
-	cLight.setAttribute("class", "green-dot");
-	
+	//If rocket has been launched, allow marking main chute as deployed
+	if(launched) {
+		cLight.setAttribute("class", "green-dot");
+		cButton.setAttribute("class", "button-grayed");
+	}
 }
-
-
-
 
 
 

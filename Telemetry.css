@@ -5,6 +5,7 @@
 	
 	p {
 		font-size: 115%;
+		color: white;
 	}
 	
 	h2 {
@@ -71,10 +72,10 @@
 		border-radius: 50%;
 		display: inline-block;
 	}
+	    
 	  
-	 
 	  
-	.launch-button-initial {
+	.button-grayed {
 		color: black;
 		font-weight: bold;
 		border-radius: 50%;
@@ -83,11 +84,11 @@
 		margin-right: 7.5%;
 		font-size: 110%;
 		text-align: center;
-		background: linear-gradient(to bottom, #FF0000, #8B0000);
+		background: linear-gradient(to bottom, #404040, #202020);
 		position: relative;
 	}
 	  
-	.launch-button-initial:after {
+	.button-grayed:after {
 		content: "";
 		width: 60%;
 		height: 60%;
@@ -95,23 +96,18 @@
 		top: 20%;
 		left: 20%;
 		border-radius: 50%;
-		background: rgba(255,255,255,0.3);
+		background: rgba(128, 128, 128, 0.3);
 	}
 	  
-	.launch-button-initial:hover {
-		background: linear-gradient(to bottom, #CC0000, #8B0000);
+	.button-grayed:hover {
+		background: linear-gradient(to bottom, #808080, #C0C0C0);
 		cursor: pointer;
 	}
 	  
 	  
-	
-	.launch-button-pressed {
-		
-	}
 	  
 	  
-	  
-	.ejection-button {
+	.button-active {
 		color: black;
 		font-weight: bold;
 		border-radius: 50%;
@@ -124,7 +120,7 @@
 		position: relative;
 	}
 	  
-	.ejection-button:after {
+	.button-active:after {
 		content: "";
 		width: 60%;
 		height: 60%;
@@ -135,7 +131,7 @@
 		background: rgba(255,255,255,0.3);
 	}
 	  
-	.ejection-button:hover {
+	.button-active:hover {
 		background: linear-gradient(to bottom, #CC0000, #8B0000);
 		cursor: pointer;
 	}

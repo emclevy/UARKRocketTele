@@ -1,20 +1,36 @@
 <html>
 <head>
-	<title>UARK Rocket Telemetry</title>
+	<title>Team 9 - Rocket Telemetry</title>
 	<meta charset = "UTF-8">
-	<script src="javascript/Data.js"></script>
-	<link rel="stylesheet" href="RocketTele.css">
+	<link rel="stylesheet" href="Telemetry.css">
 </head>
 
 
-<body onload = "display()">
+<body>
 	<!-- Upper row -->
 	<div class="row">	
+		<script src="javascript/Data.js"></script>
 		<!-- Quadrant containing live data display -->
 		<div style="border:3px double white;" class="quadrant"><h2 style="color:white">Live data:</h2>
-			<p class="form-field" style="color:white">  <label for="Accel">Acceleration:</label> <input type="text" id="Accel" name="Accel" value="0 m/s²" readonly="true" /></p>
-			<p class="form-field" style="color:white">  <label for="Vel">Velocity:</label> <input type="text" id="Vel" name="Vel" value="0 m/s" readonly="true"> </p>
-			<p class="form-field" style="color:white">  <label for="Alt">Altitude:</label> <input type="text" id="Alt" name="Alt" value="0 meters" readonly="true"> </p>
+			<p class="form-field">
+				<label for="Accel">Acceleration:</label>
+				<input type="text" id="Accel" name="Accel" value="0 m/s²" readonly="true" />
+			</p>
+			<p class="form-field">
+				<label for="Vel">Velocity:</label>
+				<input type="text" id="Vel" name="Vel" value="0 m/s" readonly="true">
+			</p>
+			<p class="form-field">
+				<label for="Alt">Altitude:</label>
+				<input type="text" id="Alt" name="Alt" value="0 meters" readonly="true">
+			</p>
+			<p id="fileInField" class="form-field">
+				<label for="dataInput">Select test data</label>
+				<input type="file" id="dataInput" style="flex-basis: 70%" onchange="loadData(this)">
+			</p>
+			<p id="fileLoaded" hidden=true>
+				Successfully loaded test data.
+			</p>
 		</div>
 		
 		<!-- Quadrant containing peak data and control buttons -->
@@ -24,14 +40,15 @@
 				<p class="form-field"style="color:white"> <label for="Pspeed">Peak speed:</label> <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
 				<p class="form-field"style="color:white; padding-bottom: 1%"> <label for="PAccel">Peak acceleration:</label> <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
 				
-				<span id="engineLight" class="red-dot"></span><p style="color:white; display: inline-block; margin-left: 2%; margin-right: 5%; vertical-align: middle;">Engine</p>
+				<span id="launchLight" class="red-dot"></span><p style="color:white; display: inline-block; margin-left: 2%; margin-right: 5%; vertical-align: middle;">Engine</p>
+				<span id="apogeeLight" class="gray-dot"></span><p style="color:white; display: inline-block; margin-left: 2%; margin-right: 5%; vertical-align: middle;">Apogee</p>
 				<span id="drogueLight" class="gray-dot"></span><p style="color:white; display: inline-block; margin-left: 2%; margin-right: 5%; vertical-align: middle;">Drogue</p>
 				<span id="chuteLight" class="gray-dot"></span><p style="color:white; display: inline-block; margin-left: 2%; margin-right: 5%; vertical-align: middle;">Parachute</p>
 			
-			<h2 style="color:white; padding-bottom: 1%">Controls:</h2>
-				<button id="launchButton" class="launch-button-initial" onclick="beginLaunch()">LAUNCH<br>ROCKET</button>
-				<button id="drogueButton" class="ejection-button" onclick="toggleDrogue()">EJECT<br>DROGUE</button>
-				<button id="chutebutton" class="ejection-button" onclick="toggleChute()">EJECT<br>CHUTE</button>
+			<h2 style="color:white; padding-bottom: 1%">Controls (double click):</h2>
+				<button id="launchButton" class="button-active" ondblclick="beginLaunch()">LAUNCH<br>ROCKET</button>
+				<button id="drogueButton" class="button-grayed" ondblclick="toggleDrogue()">EJECT<br>DROGUE</button>
+				<button id="chuteButton" class="button-grayed" ondblclick="toggleChute()">EJECT<br>CHUTE</button>
 		</div>
 	</div> 
 	

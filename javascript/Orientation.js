@@ -1,3 +1,5 @@
+var launched = 0;
+
 var rktCanv = document.getElementById('orientation');
 var rktCtx = rktCanv.getContext('2d');
 
@@ -34,23 +36,30 @@ rktImg.addEventListener("load", function() {
 
 //Update orientation display
 setInterval(function() {
-	var prevTilt = rktTilt;
-	rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
+	var lLight = document.getElementById("launchLight");
 	
-	rktTilt += 1;
-	if(rktTilt == 360)
-		rktTilt = 0;
+	if(lLight.getAttribute("class") == "green-dot") {
+		launched = 1;
+	}
 	
-	rktCtx.translate(rktX + rktW / 2, rktY + rktH / 2);
-	
-	//Remove previous tilt so rotation stays linear
-	rktCtx.rotate(-prevTilt*Math.PI/180);
-	//Apply new rotation
-	rktCtx.rotate(rktTilt*Math.PI/180);
-	
-	rktCtx.translate(-(rktX + rktW / 2), -(rktY + rktH / 2));
-	
-	rktCtx.drawImage(rktImg, rktX, rktY, rktW, rktH);
-	console.log("Image width: " + rktW + " Image height: " + rktH);
+	if(launched) {
+		var prevTilt = rktTilt;
+		rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
+		
+		rktTilt += 1;
+		if(rktTilt == 360)
+			rktTilt = 0;
+		
+		rktCtx.translate(rktX + rktW / 2, rktY + rktH / 2);
+		
+		//Remove previous tilt so rotation stays linear
+		rktCtx.rotate(-prevTilt*Math.PI/180);
+		//Apply new rotation
+		rktCtx.rotate(rktTilt*Math.PI/180);
+		
+		rktCtx.translate(-(rktX + rktW / 2), -(rktY + rktH / 2));
+		
+		rktCtx.drawImage(rktImg, rktX, rktY, rktW, rktH);
+	}
 	
 }, 10);	
