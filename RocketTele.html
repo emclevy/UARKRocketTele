@@ -2,56 +2,56 @@
 <head>
 	<title>UARK Rocket Telemetry</title>
 	<meta charset = "UTF-8">
-	<script src="javascript/LiveData.js"></script>
+	<script src="javascript/Data.js"></script>
 	<link rel="stylesheet" href="RocketTele.css">
 </head>
 
 
 <body onload = "display()">
-	<div class="row">		  
-		<div  style="border:3px double green;" class="columnData"><h2 style="color:#008000">Live data - </h2>
-			<p class="form-field" style="color:#008000">  <label for="Accel">Acceleration:</label> <input type="text" id="Accel" name="Accel" value="0 m/s²" readonly="true" /></p>
-			<p class="form-field" style="color:#008000">  <label for="Vel">Velocity:</label> <input type="text" id="Vel" name="Vel" value="0 m/s" readonly="true"> </p>
-
-			<p class="form-field" style="color:#008000">  <label for="Boost1">Booster 1 time:</label> <input type="text" id="Boost1" name="Boost1" readonly="true" /></p>
-			<p class="form-field" style="color:#008000">  <label for="Boost2">Booster 2 time:</label> <input type="text" id="Boost2" name="Boost2" readonly="true" /></p>
-			<p class="form-field" style="color:#008000">  <label for="Boost3">Booster 3 time:</label> <input type="text" id="Boost3" name="Boost3" readonly="true" /></p>
+	<!-- Upper row -->
+	<div class="row">	
+		<!-- Quadrant containing live data display -->
+		<div style="border:3px double white;" class="quadrant"><h2 style="color:white">Live data:</h2>
+			<p class="form-field" style="color:white">  <label for="Accel">Acceleration:</label> <input type="text" id="Accel" name="Accel" value="0 m/s²" readonly="true" /></p>
+			<p class="form-field" style="color:white">  <label for="Vel">Velocity:</label> <input type="text" id="Vel" name="Vel" value="0 m/s" readonly="true"> </p>
+			<p class="form-field" style="color:white">  <label for="Alt">Altitude:</label> <input type="text" id="Alt" name="Alt" value="0 meters" readonly="true"> </p>
 		</div>
-		<div  style="border:3px double green;padding-left:2%;padding-right:2%;" class="columnData"><h2 style="color:#008000">Peak data - </h2>
-			<p class="form-field"style="color:#008000"> <label for="PAlti">Altitude:</label> <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
-			<p class="form-field"style="color:#008000"> <label for="Pspeed">Speed:</label> <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
-			<p class="form-field"style="color:#008000"> <label for="PAccel">Acceleration:</label> <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
-			<p class="form-field"style="color:#008000"> <label for="Eject">Ejection Altitude:</label> <input type="text" id="Eject" name="Eject" readonly="true" /></p>
-			<p><button class="ejection-button">DROGUE</button>"      "<button class="ejection-button">CHUTE</button></p>
 		
+		<!-- Quadrant containing peak data and control buttons -->
+		<div style="border:3px double white;padding-left:2%;padding-right:2%;" class="quadrant">
+			<h2 style="color:white">Recorded data:</h2>
+				<p class="form-field"style="color:white"> <label for="PAlti">Peak altitude:</label> <input type="text" id="PAlti" name="PAlti" readonly="true" /></p>
+				<p class="form-field"style="color:white"> <label for="Pspeed">Peak speed:</label> <input type="text" id="PSpeed" name="Pspeed" readonly="true" /></p>
+				<p class="form-field"style="color:white; padding-bottom: 1%"> <label for="PAccel">Peak acceleration:</label> <input type="text" id="PAccel" name="PAccel" readonly="true" /></p>
+				
+				<span id="engineLight" class="red-dot"></span><p style="color:white; display: inline-block; margin-left: 2%; margin-right: 5%; vertical-align: middle;">Engine</p>
+				<span id="drogueLight" class="gray-dot"></span><p style="color:white; display: inline-block; margin-left: 2%; margin-right: 5%; vertical-align: middle;">Drogue</p>
+				<span id="chuteLight" class="gray-dot"></span><p style="color:white; display: inline-block; margin-left: 2%; margin-right: 5%; vertical-align: middle;">Parachute</p>
+			
+			<h2 style="color:white; padding-bottom: 1%">Controls:</h2>
+				<button id="launchButton" class="launch-button-initial" onclick="beginLaunch()">LAUNCH<br>ROCKET</button>
+				<button id="drogueButton" class="ejection-button" onclick="toggleDrogue()">EJECT<br>DROGUE</button>
+				<button id="chutebutton" class="ejection-button" onclick="toggleChute()">EJECT<br>CHUTE</button>
 		</div>
 	</div> 
+	
+	<!-- Lower row -->
 	<div class="row">
-		<div  style="border:3px double green;" class="columnGraph">
-			<p style="color:#008000">GPS position: </p>
-			<!-- GPS graphic -->
+		<!-- GPS graphic -->
+		<div style="border:3px double white;" class="quadrant">
+			<h2 style="color:white">GPS position: </h2>
 			<body>
-				<canvas id="gps" style="width:85%; height:85%; margin-left:7%"></canvas>
+				<canvas id="gps" style="width:55%; height:85%; margin-left:21%"></canvas>
 				<script src="javascript/GPS.js"></script>
 			</body>
 		</div>
 		
-		<div  style="border:3px double green;" class="columnGraph">
-			<p style="color:#008000">Orientation: </p>
-			<!-- Orientation graphic -->
+		<!-- Orientation graphic -->
+		<div style="border:3px double white;" class="quadrant">
+			<h2 style="color:white">Orientation: </h2>
 			<body>
 				<canvas id="orientation" style="width:85%; height:85%; margin-left:7.5%"></canvas>
 				<script src="javascript/Orientation.js"></script>
-			</body>
-		</div>
-		<div  style="border:3px double green;" class="columnGraph">
-			<p style="color:#008000">E-Match states: </p>
-			<!-- EMATCH status lights -->
-			<body>
-					<br>
-					<span class="dot" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 5%; vertical-align: middle;">Engine</p><br><br><br>
-					<span class="dot" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 5%; vertical-align: middle;">Drogue</p><br><br><br>
-					<span class="dot" style="display: inline-block; vertical-align: middle;"></span><p style="color:#008000; display: inline-block; margin-left: 5%; vertical-align: middle;">Parachute</p><br>
 			</body>
 		</div>
 	</div>
