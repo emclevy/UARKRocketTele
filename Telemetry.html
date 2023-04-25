@@ -65,22 +65,29 @@
 	
 	<!-- Lower row -->
 	<div class="row">
-		<!-- GPS and altitude graphics -->
-		<div style="border:3px double white;" class="quadrant">
-			<h2 style="color:white">Displacement, altitude (200m) vs time (10s): </h2>
+		<!-- GPS graphic -->
+		<div style="border:3px double white; width: 33%" class="quadrant">
+			<h2 style="color:white">Displacement (increments TBD): </h2>
 			<body>
-				<canvas id="gps" style="width:49%; height:85%"></canvas>
+				<canvas id="gps" style="width:100%; height:85%"></canvas>
 				<script src="javascript/GPS.js"></script>
-				<canvas id="altGraph" style="width:49%; height:85%; padding-left: 5%"></canvas>
+			</body>
+		</div>
+		
+		<!-- Altitude graphic -->
+		<div style="border:3px double white; width: 33%" class="quadrant">
+			<h2 style="color:white; font-size: 120%; padding-top: 2%">Altitude (incr. 200m) vs time (incr. 10s): </h2>
+			<body>
+				<canvas id="altGraph" style="width:100%; height:85%; padding-left:5%"></canvas>
 				<script src="javascript/Altitude.js"></script>
 			</body>
 		</div>
 		
 		<!-- Orientation graphic -->
-		<div style="border:3px double white;" class="quadrant">
+		<div style="border:3px double white; width: 33%" class="quadrant">
 			<h2 style="color:white">Orientation: </h2>
 			<body>
-				<canvas id="orientation" style="width:85%; height:85%; margin-left:7.5%"></canvas>
+				<canvas id="orientation" style="width:100%; height:85%"></canvas>
 				<script src="javascript/Orientation.js"></script>
 			</body>
 		</div>
