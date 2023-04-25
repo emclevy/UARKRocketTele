@@ -38,6 +38,7 @@ function beginLaunch() {
 	var aLight = document.getElementById("apogeeLight");
 	var dLight = document.getElementById("drogueLight");
 	var cLight = document.getElementById("chuteLight");
+	var lanLight = document.getElementById("landLight");
 	
 	//Initiate rocket launch simulation
 	if(!launched && dataLoaded) {
@@ -48,6 +49,7 @@ function beginLaunch() {
 		cButton.setAttribute("class", "button-active");
 		cLight.setAttribute("class", "red-dot");
 		aLight.setAttribute("class", "red-dot");
+		lanLight.setAttribute("class", "red-dot");
 		launched = 1;
 	}
 	else if(!dataLoaded) {

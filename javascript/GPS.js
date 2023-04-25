@@ -9,7 +9,7 @@ gpsImgs.length = 2;
 gpsImgs[0] = new Image();
 gpsImgs[0].src = "sprites/gps.png";
 gpsImgs[1] = new Image();
-gpsImgs[1].src = "sprites/gpsdot.png";
+gpsImgs[1].src = "sprites/dot.png";
 
 //Draw graph background once source has loaded
 gpsImgs[0].addEventListener("load", function() {

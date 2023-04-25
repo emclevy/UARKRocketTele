@@ -6,6 +6,9 @@
 	p {
 		font-size: 115%;
 		color: white;
+		margin-left: 2%;
+		margin-right: 5%;
+		vertical-align: middle;
 	}
 	
 	h2 {
@@ -108,7 +111,7 @@
 	  
 	  
 	.button-active {
-		color: black;
+		color: white;
 		font-weight: bold;
 		border-radius: 50%;
 		width: 20%;
