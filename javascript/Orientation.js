@@ -35,9 +35,10 @@ rktImg.addEventListener("load", function() {
 
 
 //Update orientation display
-setInterval(function() {
+function updateOrientation(tilt) {
 	var lLight = document.getElementById("launchLight");
 	
+	//Check if launch has initiated
 	if(lLight.getAttribute("class") == "green-dot") {
 		launched = 1;
 	}
@@ -46,7 +47,9 @@ setInterval(function() {
 		var prevTilt = rktTilt;
 		rktCtx.clearRect(0, 0, rktCanv.width, rktCanv.height);
 		
-		rktTilt += 1;
+		//To account for how the image is drawn through the canvas with rotation, needed some adjustment
+		//to make it accurately reflect the tilt
+		rktTilt = -(tilt - 90);
 		if(rktTilt == 360)
 			rktTilt = 0;
 		
@@ -61,5 +64,4 @@ setInterval(function() {
 		
 		rktCtx.drawImage(rktImg, rktX, rktY, rktW, rktH);
 	}
-	
-}, 10);	
+}

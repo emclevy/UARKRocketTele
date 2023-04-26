@@ -10,19 +10,19 @@
 	<!-- Upper row -->
 	<div class="row">	
 		<script src="javascript/Data.js"></script>
-		<!-- Quadrant containing live data display -->
+		<!-- Quadrant containing live data display and status lights -->
 		<div style="border:3px double white;" class="quadrant"><h2 style="color:white">Live data:</h2>
 			<p class="form-field">
-				<label for="Alt">Altitude:</label>
-				<input type="text" id="Alt" name="Alt" value="0 meters" readonly="true">
+				<label for="altitude">Altitude:</label>
+				<input type="text" id="altitude" value="0 meters" readonly="true">
 			</p>
 			<p class="form-field">
-				<label for="Vel">Velocity:</label>
-				<input type="text" id="Vel" name="Vel" value="0 m/s" readonly="true">
+				<label for="velocity">Velocity:</label>
+				<input type="text" id="velocity" value="0 m/s" readonly="true">
 			</p>
 			<p class="form-field">
-				<label for="Accel">Acceleration:</label>
-				<input type="text" id="Accel" name="Accel" value="0 Gs" readonly="true" />
+				<label for="acceleration">Acceleration:</label>
+				<input type="text" id="acceleration" value="0 Gs" readonly="true" />
 			</p>
 			<p id="fileInField" class="form-field">
 				<label for="dataInput" style="padding-bottom: 2%">Select test data</label>
@@ -44,16 +44,16 @@
 		<div style="border:3px double white;padding-left:2%;padding-right:2%;" class="quadrant">
 			<h2 style="color:white">Recorded data:</h2>
 				<p class="form-field"style="color:white">
-					<label for="PAlti">Peak altitude:</label>
-					<input type="text" id="PAlti" name="PAlti" value="0 m" readonly="true" />
+					<label for="peakAlt">Peak altitude:</label>
+					<input type="text" id="peakAlt" value="0 m" readonly="true" />
 				</p>
 				<p class="form-field"style="color:white">
-					<label for="Pspeed">Peak speed:</label>
-					<input type="text" id="PSpeed" name="Pspeed" value="0 m/s" readonly="true" />
+					<label for="peakSpeed">Peak speed:</label>
+					<input type="text" id="peakSpeed" value="0 m/s" readonly="true" />
 				</p>
 				<p class="form-field"style="color:white; padding-bottom: 3%">
-					<label for="PAccel">Peak acceleration:</label>
-					<input type="text" id="PAccel" name="PAccel" value="0 Gs" readonly="true" />
+					<label for="peakAccel">Peak acceleration:</label>
+					<input type="text" id="peakAccel" value="0 Gs" readonly="true" />
 				</p>
 				
 			<h2 style="color:white; padding-bottom: 5%">Controls (double click):</h2>
@@ -67,7 +67,7 @@
 	<div class="row">
 		<!-- GPS graphic -->
 		<div style="border:3px double white; width: 33%" class="quadrant">
-			<h2 style="color:white">Displacement (increments TBD): </h2>
+			<h2 style="color:white">Displacement (incr. 200m): </h2>
 			<body>
 				<canvas id="gps" style="width:100%; height:85%"></canvas>
 				<script src="javascript/GPS.js"></script>
@@ -75,7 +75,7 @@
 		</div>
 		
 		<!-- Altitude graphic -->
-		<div style="border:3px double white; width: 33%" class="quadrant">
+		<div style="border:3px double white; width: 34%" class="quadrant">
 			<h2 style="color:white; font-size: 120%; padding-top: 2%">Altitude (incr. 200m) vs time (incr. 10s): </h2>
 			<body>
 				<canvas id="altGraph" style="width:100%; height:85%; padding-left:5%"></canvas>
