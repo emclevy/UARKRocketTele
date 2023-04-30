@@ -28,7 +28,7 @@ int main(void)
     param_test.i2cClk = UCS_getSMCLK();
     param_test.dataRate = USCI_B_I2C_SET_DATA_RATE_100KBPS;
     USCI_B_I2C_initMaster(USCI_B1_BASE, &param_test);
-    USCI_B_I2C_setSlaveAddress(USCI_B1_BASE, 0x76);
+    USCI_B_I2C_setSlaveAddress(USCI_B1_BASE, 0x76); 
     USCI_B_I2C_setMode(USCI_B1_BASE, USCI_B_I2C_TRANSMIT_MODE);
     USCI_B_I2C_enable(USCI_B1_BASE);
     clock_init();
@@ -42,7 +42,9 @@ int main(void)
    uint8_t testData[] = {10,20,30};
 
     while(1){
-        USCI_B_I2C_masterSendSingleByte(USCI_B1_BASE, 0x353);
+        USCI_B_I2C_masterSendSingleByte(USCI_B1_BASE, 0x35); //send single byte
+        
+        while(USCI_B_I2C_busBusy(USCI_B0_BASE)); //delay until transmission completes
         //i2c_write(BMP388_I2C_ADDR, 10, testData, 3);
         __delay_cycles(1000);
     }
