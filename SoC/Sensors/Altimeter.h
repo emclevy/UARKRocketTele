@@ -23,6 +23,8 @@
 #define pressure_sea_level 101325
 
 void i2c_init(void);
+void i2c_write(uint8_t reg, uint8_t data);
+void i2c_read(uint8_t reg, uint8_t *data, uint8_t len);
 bool bmp388_init(void);
 void bmp388_read_coefficients(void);
 void bmp388_start_measurement(void);
