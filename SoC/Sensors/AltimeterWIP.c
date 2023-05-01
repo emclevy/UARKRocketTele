@@ -3,14 +3,15 @@
 #include <msp430.h>
 #include "driverlib.h"
 
+// https://github.com/boschsensortec/BMP3-Sensor-API/tree/master
 
-void clock_init(void)
+/**void clock_init(void)
 {
     UCS_setExternalClockSource(0, 12000000);
     UCS_bypassXT2();
     P5SEL |= (BIT2 + BIT3);
     UCS_initClockSignal(UCS_SMCLK, UCS_XT2CLK_SELECT, UCS_CLOCK_DIVIDER_1);
-}
+}*/
 
 
 
@@ -22,17 +23,10 @@ int main(void)
 {
     WDTCTL = WDTPW | WDTHOLD;   // stop watchdog timer
 
-    //i2c_init();
-    USCI_B_I2C_initMasterParam param_test;
-    param_test.selectClockSource = USCI_B_I2C_CLOCKSOURCE_SMCLK;
-    param_test.i2cClk = UCS_getSMCLK();
-    param_test.dataRate = USCI_B_I2C_SET_DATA_RATE_100KBPS;
-    USCI_B_I2C_initMaster(USCI_B1_BASE, &param_test);
-    USCI_B_I2C_setSlaveAddress(USCI_B1_BASE, 0x76); 
-    USCI_B_I2C_setMode(USCI_B1_BASE, USCI_B_I2C_TRANSMIT_MODE);
-    USCI_B_I2C_enable(USCI_B1_BASE);
-    clock_init();
-    P4SEL |= BIT1 | BIT2;
+    init_i2c();
+    bmp388_init();
+    //clock_init();
+    //P4SEL |= BIT1 | BIT2;
     // Initialize the timer
     //timer_init();
 
@@ -43,7 +37,7 @@ int main(void)
 
     while(1){
         USCI_B_I2C_masterSendSingleByte(USCI_B1_BASE, 0x35); //send single byte
-        
+
         while(USCI_B_I2C_busBusy(USCI_B0_BASE)); //delay until transmission completes
         //i2c_write(BMP388_I2C_ADDR, 10, testData, 3);
         __delay_cycles(1000);
@@ -75,18 +69,6 @@ int main(void)
  * Initialize altimeter
  */
 
-/*
-void i2c_init(void)
-{
-    P4SEL |= BIT1 | BIT2; // Assign I2C pins to USCI_B0 IMU/ALT_SCL and SDA is on pins 4.1/4.2
-    UCB0CTL1 |= UCSWRST; // Enable SW reset
-    UCB0CTL0 = UCMST | UCMODE_3 | UCSYNC; // I2C master mode, synchronous mode
-    UCB0CTL1 = UCSSEL_2 | UCSWRST; // Use SMCLK, keep SW reset
-    UCB0BR0 = 80; // Set prescaler for 100kHz <-- not sure what value this needs to be
-    UCB0BR1 = 0;
-    UCB0CTL1 &= ~UCSWRST; // Clear SW reset, resume operation
-}
-*/
 
 /**
  * check if sensor is setup or not
@@ -105,7 +87,7 @@ bool bmp388_init(void)
 
 void bmp388_read_coefficients(void)
 {
-    uint8_t buffer[21];
+    uint8_t buffer[23];
 
     i2c_read(BMP388_I2C_ADDR, 0x31, buffer, sizeof(buffer));
 
@@ -120,8 +102,8 @@ void bmp388_read_coefficients(void)
     p5 = (buffer[15] << 8) | buffer[14];
     p6 = (buffer[17] << 8) | buffer[16];
     p7 = (buffer[19] << 8) | buffer[18];
-    //p8 = (buffer[21] << 8) | buffer[20];
-    //p9 = (buffer[23] << 8) | buffer[22];
+    p8 = (buffer[21] << 8) | buffer[20];
+    p9 = (buffer[23] << 8) | buffer[22];
 }
 
 /*
@@ -160,6 +142,39 @@ double bmp388_compensate_pressure(uint32_t raw_pressure, double temperature)
     return p1 * (raw_pressure * 0.000001 + p8 * 0.000000001) + p2 * (temperature - p5 * 256);
 }
 
+void init_i2c(void){
+    USCI_B_I2C_initMasterParam param_test;
+    param_test.selectClockSource = USCI_B_I2C_CLOCKSOURCE_SMCLK;
+    param_test.i2cClk = UCS_getSMCLK();
+    param_test.dataRate = USCI_B_I2C_SET_DATA_RATE_100KBPS;
+    USCI_B_I2C_initMaster(USCI_B1_BASE, &param_test);
+    USCI_B_I2C_setSlaveAddress(USCI_B1_BASE, 0x76);
+    USCI_B_I2C_setMode(USCI_B1_BASE, USCI_B_I2C_TRANSMIT_MODE);
+    USCI_B_I2C_enable(USCI_B1_BASE);
+}
+
+void i2c_write(uint8_t reg, uint8_t data)
+{
+    USCI_B_I2C_setMode(USCI_B1_BASE, USCI_B_I2C_TRANSMIT_MODE);
+    USCI_B_I2C_masterSendMultiByteStartWithTimeout(USCI_B1_BASE, reg, USCI_B_I2C_timeout);
+    USCI_B_I2C_masterSendMultiByteFinishWithTimeout(USCI_B1_BASE, data, USCI_B_I2C_timeout);
+}
+
+void i2c_read(uint8_t reg, uint8_t *data, uint8_t len)
+{
+    USCI_B_I2C_setMode(USCI_B1_BASE, USCI_B_I2C_TRANSMIT_MODE);
+    USCI_B_I2C_masterSendMultiByteStartWithTimeout(USCI_B1_BASE, reg, USCI_B_I2C_timeout);
+    USCI_B_I2C_setMode(USCI_B1_BASE, USCI_B_I2C_RECEIVE_MODE);
+    USCI_B_I2C_masterReceiveMultiByteStartWithTimeout(USCI_B1_BASE, USCI_B_I2C_timeout);
+
+    uint8_t i = 0;
+    for (i; i < len - 1; i++)
+    {
+        data[i] = USCI_B_I2C_masterReceiveMultiByteNextWithTimeout(USCI_B1_BASE, USCI_B_I2C_timeout);
+    }
+
+    data[len - 1] = USCI_B_I2C_masterReceiveMultiByteFinishWithTimeout(USCI_B1_BASE, USCI_B_I2C_timeout);
+}
 
 /*
  * Timer and interrupt setup
@@ -180,5 +195,4 @@ __interrupt void Timer_A0_ISR(void)
     //Calculate Altitude
 
 }
-
 
