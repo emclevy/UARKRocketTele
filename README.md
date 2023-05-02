@@ -25,5 +25,7 @@ Data is displayed on the webpage in a graphical way so it's easier to read.
 # Credits and contact
 
 Evan Foley - etfoley@uark.edu
+
 Kormah Dorko - ktdorko@uark.edu
+
 Rodrigo Mouron - rjmouron@uark.edu
