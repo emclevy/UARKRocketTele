@@ -12,6 +12,7 @@ This is the GUI branch containing all the code needed to open the UI and simulat
 # Features
 
 The provided code allows a user to select a data file to be loaded. We have included the file 'realtime.csv' to test our program. 
+Currently it will only simulate over that file as the data reads specific columns from the .csv.
 
 Data is displayed visually so it's easier to read.
 
