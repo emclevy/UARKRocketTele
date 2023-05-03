@@ -12,6 +12,7 @@ This is the SOC branch containing all the code needed for the theoretical automa
 # Features
 
 The provided code allows a user to fully automate a rocket with a custom MSP432 PCB.
+
 (NOTE: This code is THEORETICAL due to some complications with the PCB that were unforseen and unsolvable in the time-frame of the project.)
 
 # Installation and usage
@@ -22,4 +23,5 @@ The provided code allows a user to fully automate a rocket with a custom MSP432 
 # Credits and contact
 
 Eli Levy-Mackay - elevymac@uark.edu
+
 Troy Jones - tj026@uark.edu
