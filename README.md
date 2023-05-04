@@ -5,7 +5,7 @@ Welcome to our project GitHub, we have split our work into two separate branches
 
 SOC - Holds all hardware code. Worked on mostly by Eli Levy-Mackay and Troy Jones.
 
-GUI - Holds all code for user interface, also contains everthing you need to run our simulation with test data. Worked on mostly by Evan Foley, Kormah Dorko, and Rodrigo Mouron.
+GUI - Holds all code for user interface, also contains everything you need to run our simulation with test data. Worked on mostly by Evan Foley, Kormah Dorko, and Rodrigo Mouron.
 
 # Credits and contact
 
